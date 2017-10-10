@@ -1,0 +1,35 @@
+.sub-container {
+    border: 1px solid #eee;
+}
+
+.sub-title {
+    line-height: 1;
+    padding: 15px;
+    background-color: #f2f2f2;
+}
+
+.bar, .dot {
+    height: 280px;
+}
+
+.title {
+    margin-top: 10px;
+}
+
+.data {
+    color: #333;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.left-data {
+    flex-grow: 1;
+    -webkit-grow: 1;
+    text-align: left;
+}
+
+.right-data {
+    flex-grow: 1;
+    -webkit-grow: 1;
+    text-align: left;
+}

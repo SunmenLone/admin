@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+    <style>
+
+        .layui-form-item .layui-inline {
+            margin-right: 0;
+        }
+
+        .label-content {
+            padding-left: 0;
+            width: 175px;
+            text-align: left;
+        }
+
+        .label-content2 {
+            padding-left: 0;
+            text-align: left;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class="body-main">
+    <div class="sub-title">
+        <span class="layui-breadcrumb">
+            <a><cite style="color:#009688;">订单管理</cite></a>
+        </span>
+    </div>
+    <div class="filter-area">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">订单状态：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="0" title="全部">
+                    <input type="radio" name="sex" value="1" title="未付款">
+                    <input type="radio" name="sex" value="2" title="支付完成">
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单时间：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="选择订单时间查询" id="time">
+                    </div>
+                    <label class="layui-form-label">商品名称：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" placeholder="输入商品名称查询" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">医生：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="doc_name" autocomplete="off" placeholder="输入医生姓名查询" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">居民：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="pat_name" placeholder="输入居民姓名查询" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline"><button class="layui-btn layui-btn-small">查询</button></div>
+            </div>
+        </form>
+    </div>
+    <table id="odr_table" lay-filter=""></table>
+</div>
+
+<div id="modal" class="mask">
+    <div class="modal-content" style="width: 900px; height: 400px;">
+        <div class="modal-title">
+            <div class="modal-title__text">订单详情</div>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#modal').attr('hidden','true');"></img>
+        </div>
+        <form class="layui-form" action="" style="color: #666;">
+            <div class="layui-form-item filter-area-form-item" style="margin-top: 10px;">
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单时间：</label>
+                    <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                    <label class="layui-form-label">订单编号：</label>
+                    <label class="layui-form-label label-content">112233445566778899</label>
+                    <label class="layui-form-label">订单状态：</label>
+                    <label class="layui-form-label label-content">支付成功</label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">医生：</label>
+                    <label class="layui-form-label label-content">谢医生</label>
+                    <label class="layui-form-label">居民：</label>
+                    <label class="layui-form-label label-content">爱新觉罗哈哈</label>
+                    <label class="layui-form-label">居民手机：</label>
+                    <label class="layui-form-label label-content">12345678901</label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品名称：</label>
+                    <label class="layui-form-label label-content">图文咨询</label>
+                    <label class="layui-form-label">服务期限：</label>
+                    <label class="layui-form-label label-content" style="width:auto;">2017-08-12 12：00 至 2017-11-12 12：00</label>
+
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">总次数：</label>
+                    <label class="layui-form-label label-content2">3</label>
+                    <label class="layui-form-label">剩余次数：</label>
+                    <label class="layui-form-label label-content2">1</label>
+                    <label class="layui-form-label">价格：</label>
+                    <label class="layui-form-label label-content2" style="width: 120px;">￥10000.00</label>
+                    <label class="layui-form-label">付款金额：</label>
+                    <label class="layui-form-label label-content2" style="width: 120px;">￥10000.00</label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 130px;">医生开始服务时间：</label>
+                    <label class="layui-form-label label-content">2017-08-12 12：00</label>
+                    <label class="layui-form-label" style="width: 130px;">医生结束服务时间：</label>
+                    <label class="layui-form-label label-content">2017-11-12 12：00</label>
+                </div>
+            </div>
+        </form>
+        <div style="position: absolute; left: 0; right: 0; top: 330px; bottom: 15px; text-align: center;">
+            <button class="layui-btn" onclick="$('#modal').attr('hidden','true');">关闭</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../js/pages/odrman.js"></script>
+</body>
+</html>

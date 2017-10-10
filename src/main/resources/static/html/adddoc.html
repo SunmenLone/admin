@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publish Management</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+    <style>
+
+        .layui-form-item {
+            margin: 0 0 15px -15px;
+        }
+
+        .layui-upload-img {
+            width: 92px;
+            height: 92px;
+            margin: 0 10px 10px 0;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="body-main">
+    <div class="sub-title">
+        <span class="layui-breadcrumb">
+            <a href="docman.html">医生管理</a>
+            <a><cite style="color:#009688;">新增医生</cite></a>
+        </span>
+    </div>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录帐号：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="account" required lay-verify="required" placeholder="请输入登录帐号" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">大于6位的字母和数字组合</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录密码：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="password" required lay-verify="required" placeholder="请输入登录密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">密码长度大于6位</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男" checked>
+                <input type="radio" name="sex" value="1" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="phone" required lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">执业编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="qualcode" required lay-verify="required" placeholder="请输入执业编码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">医院：</label>
+            <div class="layui-input-inline">
+                <select name="type" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">职称：</label>
+            <div class="layui-input-inline">
+                <select name="type" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">科室：</label>
+            <div class="layui-input-inline">
+                <select name="type" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">1</option>
+                    <option value="1">2</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">医生头像：</label>
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="upload_avatar">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" style="margin-left: 110px;" id="avatar">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证照：</label>
+            <div class="layui-input-inline">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="upload_id1">上传正面</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="id1">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="upload_id2">上传反面</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="id2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">执业证号：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="qualno" required lay-verify="required" placeholder="请输入执业证号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 10px;">
+            <div class="layui-inline">
+                <label class="layui-form-label">证件期限：</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="选择发证日期" id="date1">
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" placeholder="选择到期日期" id="date2">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">执业证照：</label>
+            <div class="layui-input-inline">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="upload_no1">上传第一页</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="no1">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="upload_no2">上传第二页</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="no2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">专业擅长：</label>
+            <div class="layui-input-block">
+                <textarea name="content" required placeholder="请输入专业擅长" class="layui-textarea" style="width: 500px; "></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">职业经验：</label>
+            <div class="layui-input-block">
+                <textarea name="content" required placeholder="请输入职业经验" class="layui-textarea" style="width: 500px; "></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">添加</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script src="../layui/layui.js"></script>
+<script src="../js/pages/adddoc.js"></script>
+</body>
+</html>

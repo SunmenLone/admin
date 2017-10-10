@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <script src="../js/echarts.common.min.js"></script>
+</head>
+<body>
+    <div class="body-main">
+        <p class="layui-elem-quote">加入情况</p>
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <div class="data">
+                    <div class="left-data"><p>加入医生总数: 1000000000</p><p>新增医生总数: 100</p></div>
+                    <div class="right-data"><p>加入居民总数: 1000</p><p>新增居民总数: 100</p></div>
+                </div>
+                <div id="bar1" class="bar"></div>
+            </div>
+        </div>
+        <p class="layui-elem-quote title">居民健康状况</p>
+        <div id="pie" style="width: 480px;height:240px;"></div>
+        <p class="layui-elem-quote title">订单概况</p>
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <div class="data">
+                    <div class="left-data"><p>订单总数: 1000000000</p><p>今日订单数量: 100</p></div>
+                    <div class="right-data"><p>订单总额度: 1000</p><p>订单今日额度: 100</p></div>
+                </div>
+                <div id="bar2" class="bar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../layui/layui.js"></script>
+    <script src="../js/pages/home.js"></script>
+
+</body>
+</html>

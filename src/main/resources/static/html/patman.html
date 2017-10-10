@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Management</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+<body>
+<div class="body-main">
+    <div class="sub-title">
+        <span class="layui-breadcrumb">
+            <a><cite style="color:#009688;">居民管理</cite></a>
+        </span>
+    </div>
+    <div class="filter-area">
+        <form class="layui-form" action="">
+            <div style="display:flex;">
+                <div class="layui-form-item filter-area-form-item">
+                    <label class="layui-form-label">性别：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="0" title="全部">
+                        <input type="radio" name="sex" value="1" title="男">
+                        <input type="radio" name="sex" value="2" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item filter-area-form-item">
+                    <label class="layui-form-label">订单购买：</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="purchase" value="0" title="全部">
+                        <input type="radio" name="purchase" value="1" title="已购买">
+                        <input type="radio" name="purchase" value="2" title="未购买">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <label class="layui-form-label">评估结果：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="evaresult" value="0" title="全部">
+                    <input type="radio" name="evaresult" value="1" title="未评估">
+                    <input type="radio" name="evaresult" value="2" title="高危人群">
+                    <input type="radio" name="evaresult" value="3" title="中危人群">
+                    <input type="radio" name="evaresult" value="4" title="低危人群">
+                    <input type="radio" name="evaresult" value="5" title="健康人群">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年龄：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="age" value="0" title="全部">
+                    <input type="radio" name="age" value="1" title="18岁以下">
+                    <input type="radio" name="age" value="2" title="25-30岁">
+                    <input type="radio" name="age" value="3" title="30-40岁">
+                    <input type="radio" name="age" value="4" title="40-50岁">
+                    <input type="radio" name="age" value="5" title="50-60岁">
+                    <input type="radio" name="age" value="6" title="60-80岁">
+                    <input type="radio" name="age" value="7" title="80岁以上">
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">居民：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" placeholder="输入姓名或手机号查询" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline"><button class="layui-btn layui-btn-small">查询</button></div>
+                <div class="layui-inline"><a class="layui-btn layui-btn-small" href="patinfo.html">test</a></div>
+            </div>
+        </form>
+    </div>
+    <table id="pat_table" lay-filter=""></table>
+</div>
+
+
+
+<script src="../layui/layui.js"></script>
+<script src="../js/pages/patman.js"></script>
+</body>
+</html>

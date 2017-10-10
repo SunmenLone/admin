@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Management</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+    <style>
+
+        .layui-form-label {
+            color: #666;
+        }
+
+        .label-fw {
+            width: 150px;
+        }
+
+        .label-content {
+            padding-left: 0;
+            text-align: left;
+            width: 250px;
+            color: #333;
+        }
+
+        .label-content2 {
+            padding-left: 0;
+            text-align: left;
+            color: #333;
+        }
+
+        .line {
+            height: 300px;
+            margin-bottom: 15px;
+        }
+
+        .ring {
+            height: 200px;
+            width: 200px;
+        }
+
+    </style>
+    <script src="../js/echarts.common.min.js"></script>
+
+</head>
+<body>
+<div class="body-main">
+    <div>
+        <span class="layui-breadcrumb">
+            <a href="patman.html">居民管理</a>
+            <a><cite style="color:#009688;">居民详细信息</cite></a>
+        </span>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="">
+        <ul class="layui-tab-title">
+            <li class="layui-this">基本信息</li>
+            <li>订单购买信息</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 100px;">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form" action="">
+                    <p class="layui-elem-quote">个人信息</p>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">姓名：</label>
+                            <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                            <label class="layui-form-label">性别：</label>
+                            <label class="layui-form-label label-content">112233445566778899</label>
+                            <label class="layui-form-label">年龄：</label>
+                            <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">身份证号：</label>
+                            <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                            <label class="layui-form-label">手机：</label>
+                            <label class="layui-form-label label-content">112233445566778899</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">地址：</label>
+                            <label class="layui-form-label label-content">112233445566778899</label>
+                            <label class="layui-form-label">详细地址：</label>
+                            <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                        </div>
+                    </div>
+                    <p class="layui-elem-quote">健康信息</p>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">身高(cm)：</label>
+                            <label class="layui-form-label label-content2">165</label>
+                            <label class="layui-form-label">体重(kg)：</label>
+                            <label class="layui-form-label label-content2">65</label>
+                            <label class="layui-form-label">BMI(kg/m2)：</label>
+                            <label class="layui-form-label label-content2">33</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">糖尿病：</label>
+                            <label class="layui-form-label label-content2">有</label>
+                            <label class="layui-form-label">冠心病：</label>
+                            <label class="layui-form-label label-content2">无</label>
+                            <label class="layui-form-label">脑卒中：</label>
+                            <label class="layui-form-label label-content2">无</label>
+                            <label class="layui-form-label">高血压：</label>
+                            <label class="layui-form-label label-content2">有</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">家族病史：</label>
+                            <label class="layui-form-label label-content2" style="width: 285px;">家族病史</label>
+                            <label class="layui-form-label">其他病史：</label>
+                            <label class="layui-form-label label-content2" style="width: 285px;">无</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">吸烟：</label>
+                            <label class="layui-form-label label-content2">有</label>
+                            <label class="layui-form-label">吸烟量：</label>
+                            <label class="layui-form-label label-content2">无</label>
+                            <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">支/天</div>
+                            <label class="layui-form-label" style="margin-left: 160px;">饮酒：</label>
+                            <label class="layui-form-label label-content2">无</label>
+                            <label class="layui-form-label">饮酒量：</label>
+                            <label class="layui-form-label label-content2">有</label>
+                            <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">ml/天</div>
+                        </div>
+                    </div>
+                    <p class="layui-elem-quote">测量数据</p>
+                    <div style="display:flex; display: -webkit-flex;">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">记录范围：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="duration" value="0" title="全部" checked>
+                                <input type="radio" name="duration" value="1" title="最近一周">
+                                <input type="radio" name="duration" value="2" title="最近一个月">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">测量时间：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="period" value="0" title="晨起" checked>
+                                <input type="radio" name="period" value="1" title="睡前">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label label-fw">正常血压结果(次)：</label>
+                            <label class="layui-form-label label-content2">165</label>
+                            <label class="layui-form-label label-fw">偏高血压结果(次)：</label>
+                            <label class="layui-form-label label-content2">65</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label label-fw">高压最高值(mmHg)：</label>
+                            <label class="layui-form-label label-content2">165</label>
+                            <label class="layui-form-label label-fw">低压最高值(mmHg)：</label>
+                            <label class="layui-form-label label-content2">65</label>
+                        </div>
+                    </div>
+                    <div class="layui-form-item filter-area-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label label-fw">血压平均值(mmHg)：</label>
+                            <label class="layui-form-label label-content">165</label>
+                            <label class="layui-form-label label-fw">心率平均值(bpm)：</label>
+                            <label class="layui-form-label label-content2">65</label>
+                        </div>
+                    </div>
+                    <div id="line" class="line"></div>
+                    <p class="layui-elem-quote">风险评估结果</p>
+                    <div style="display: flex;">
+                        <div style="color: #333; line-height: 200px;">未来10年患心血管疾病的概率为 <span style="color:#27b0b0; font-weight: bold;">40%</span></div>
+                        <div id="ring" class="ring"></div>
+                    </div>
+                </form>
+
+                <div style="margin: 30px 0 15px 0; text-align: center;">
+                    <button class="layui-btn" onclick="">关闭</button>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <table id="odr_table" lay-filter=""></table>
+                <div style="margin: 30px 0 15px 0; text-align: center;">
+                    <button class="layui-btn" onclick="">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../layui/layui.js"></script>
+<script src="../js/pages/patinfo.js"></script>
+</body>
+</html>

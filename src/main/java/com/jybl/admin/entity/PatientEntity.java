@@ -1,4 +1,4 @@
-package scut.jiayibilin.wechat.entity;
+package com.jybl.admin.entity;
 
 
 import java.io.Serializable;
@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class PatientEntity implements Serializable{
 
+    private Long id;
 
     private String name;
 
@@ -15,7 +16,7 @@ public class PatientEntity implements Serializable{
 
     private String sex;
 
-    private int age;
+    private Integer age;
 
     private String phone;
 
@@ -27,10 +28,15 @@ public class PatientEntity implements Serializable{
 
     private String head_pic;
 
+    private String kind;
+
+    private Integer count = -1;
+
     public PatientEntity() {
  }
 
- public PatientEntity( String name, String id_card, String sex, int age, String phone, String address, String detailed_address, String wechat_id, String head_pic) {
+ public PatientEntity(Long id, String name, String id_card, String sex, Integer age, String phone, String address, String detailed_address, String wechat_id, String head_pic, String kind, Integer count) {
+  this.id = id;
   this.name = name;
   this.id_card = id_card;
   this.sex = sex;
@@ -40,9 +46,17 @@ public class PatientEntity implements Serializable{
   this.detailed_address = detailed_address;
   this.wechat_id = wechat_id;
   this.head_pic = head_pic;
+  this.kind = kind;
+  this.count = count;
  }
 
+ public Long getId() {
+  return id;
+ }
 
+ public void setId(Long id) {
+  this.id = id;
+ }
 
  public String getName() {
   return name;
@@ -68,11 +82,11 @@ public class PatientEntity implements Serializable{
   this.sex = sex;
  }
 
- public int getAge() {
+ public Integer getAge() {
   return age;
  }
 
- public void setAge(int age) {
+ public void setAge(Integer age) {
   this.age = age;
  }
 
@@ -114,5 +128,21 @@ public class PatientEntity implements Serializable{
 
  public void setHead_pic(String head_pic) {
   this.head_pic = head_pic;
+ }
+
+ public String getKind() {
+  return kind;
+ }
+
+ public void setKind(String kind) {
+  this.kind = kind;
+ }
+
+ public Integer getCount() {
+  return count;
+ }
+
+ public void setCount(Integer count) {
+  this.count = count;
  }
 }

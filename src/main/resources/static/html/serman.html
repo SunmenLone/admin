@@ -19,9 +19,9 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">状态：</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="0" title="全部">
+                    <input type="radio" name="status" value="-1" title="全部" checked>
                     <input type="radio" name="status" value="1" title="已激活">
-                    <input type="radio" name="status" value="2" title="冻结">
+                    <input type="radio" name="status" value="0" title="冻结">
                 </div>
             </div>
             <div class="layui-form-item filter-area-form-item">
@@ -31,86 +31,114 @@
                         <input type="text" name="name" placeholder="输入服务产品名称查询" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-inline"><button class="layui-btn layui-btn-small">查询</button></div>
-                <div class="layui-inline"><button class="layui-btn layui-btn-small">新增服务</button></div>
+                <div class="layui-inline"><a class="layui-btn layui-btn-small" href="javascript: search();">查询</a></div>
+                <div class="layui-inline"><a class="layui-btn layui-btn-small" href="javascript: toAdd();">新增服务</a></div>
             </div>
         </form>
     </div>
-    <table id="ser_table" lay-filter=""></table>
+    <table class="layui-table" lay-data="{even:true, url:'/service/listAll', page:true, id:'ser_table'}" lay-filter="ser">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id', width:100}">序号</th>
+            <th lay-data="{field:'name', width:300}">名称</th>
+            <th lay-data="{field:'duration', width:140}">期限</th>
+            <th lay-data="{field:'count', width:100}">次数</th>
+            <th lay-data="{field:'kind', width:100}">适用人群</th>
+            <th lay-data="{field:'price', width:100}">价格</th>
+            <th lay-data="{field:'status', width:120}">状态</th>
+            <th lay-data="{field:'time', width:190}">时间</th>
+            <th lay-data="{width:160, align:'center', toolbar: '#opt'}">操作</th>
+        </tr>
+        </thead>
+    </table>
 </div>
 
-<div id="editmodal" class="mask">
+<script type="text/html" id="opt">
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="edit">修改</a>
+    {{#  if(d.status == '已激活'){ }}
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="disable">冻结</a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="enable">激活</a>
+    {{#  } }}
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+<div id="editmodal" class="mask" hidden>
     <div class="modal-content" style="width: 480px; height: 500px;">
         <div class="modal-title">
-            <div class="modal-title__text">新增服务</div>
+            <div id="modal_title" class="modal-title__text"></div>
             <img class="modal-title__img" src="../imgs/close.png" onclick="$('#editmodal').attr('hidden','true');"></img>
         </div>
         <form class="layui-form" action="">
             <div class="layui-form-item" style="margin-top: 20px;">
                 <label class="layui-form-label">服务名称：</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入服务名称" autocomplete="off" class="layui-input" style="width: 350px;">
+                    <input type="text" name="a_name" required  lay-verify="required" placeholder="请输入服务名称" autocomplete="off" class="layui-input" style="width: 350px;">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">服务内容：</label>
                 <div class="layui-input-block">
-                    <textarea name="content" required placeholder="请输入服务内容" class="layui-textarea" style="width: 350px; "></textarea>
+                    <textarea id="a_content" required lay-verify="required" placeholder="请输入服务内容" class="layui-textarea" style="width: 350px; "></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">适用人群：</label>
                 <div class="layui-input-inline">
-                    <select name="type" lay-verify="required">
-                        <option value=""></option>
-                        <option value="0">所有人群</option>
-                        <option value="1">患病风险人群</option>
+                    <select id="a_kind" lay-verify="required">
+                        <option></option>
+                        <option value="1">所有人群</option>
+                        <option value="2">低危人群</option>
+                        <option value="3">中危人群</option>
+                        <option value="4">高危人群</option>
+                        <option value="5">极高危人群</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">服务期限：</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="duration" required lay-verify="required" placeholder="请输入服务期限" autocomplete="off" class="layui-input">
+                    <input type="text" name="a_duration" required lay-verify="required" placeholder="请输入服务期限" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">个月</div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">服务次数：</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="times" required lay-verify="required" placeholder="请输入服务次数" autocomplete="off" class="layui-input">
+                    <input type="text" name="a_count" required lay-verify="required" placeholder="请输入服务次数" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">次</div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">指导价格：</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="price" required lay-verify="required" placeholder="请输入指导价格" autocomplete="off" class="layui-input">
+                    <input type="text" name="a_price" required lay-verify="required" placeholder="请输入指导价格" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">CNY</div>
             </div>
             <div class="layui-form-item" style="margin-top: 20px;">
                 <div style="text-align: center;">
-                    <button class="layui-btn" lay-submit="" lay-filter="formDemo">添加</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <a id="btn_edit" class="layui-btn" href="javascript: edit();" hidden>修改</a>
+                    <a id="btn_add" class="layui-btn" href="javascript: add();" hidden>添加</a>
+                    <a class="layui-btn layui-btn-primary" href="javascript: $('#editmodal').attr('hidden', 'true');">关闭</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<div id="infomodal" class="mask">
+<div id="infomodal" class="mask" hidden>
     <div class="modal-content" style="width: 360px; height: 240px;">
         <div class="modal-title">
             <div class="modal-title__text">提示</div>
-            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#infomodal').attr('hidden','true');"></img>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#infomodal').attr('hidden', true);"></img>
         </div>
         <div style="text-align: center; margin-top: 64px;">
             <img style="display: inline-block; width: 32px; height: 32px;" src="../imgs/prompt.png">
-            <div id="prompt" style="display: inline-block; line-height: 32px; margin-left: 5px;">确定冻结此项服务?</div>
+            <div id="prompt" style="display: inline-block; line-height: 32px; margin-left: 5px;"></div>
         </div>
         <div style="text-align: center; margin-top: 48px;">
-            <button class="layui-btn">确定</button>
+            <button id="confirm" class="layui-btn">确定</button>
             <button class="layui-btn layui-btn-primary" onclick="$('#infomodal').attr('hidden','true');">取消</button>
         </div>
     </div>
@@ -120,5 +148,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/pages/serman.js"></script>
+
 </body>
 </html>

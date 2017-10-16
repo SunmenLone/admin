@@ -9,25 +9,46 @@ layui.use('form', function(){
 
 });
 
+var table;
+
 layui.use('table', function(){
-    var table = layui.table;
+    table = layui.table;
     //执行渲染
-    table.render({
-    elem: '#pat_table', //指定原始表格元素选择器（推荐id选择器）
-    height: 380, //容器高度
-    page: true,
-    cols: [[{ field: 'id', title: '序号', width: 80 },
-           { field: 'name', title: '姓名', width: 80 },
-           { field: 'gender', title: '性别', width: 60 },
-           { field: 'age', title: '年龄', width: 60 },
-           { field: 'phone', title: '手机号', width: 160 },
-           { field: 'idno', title: '身份证号', width: 180 },
-           { field: 'address', title: '地址', width: 240 },
-           { field: 'evares', title: '评估结果', width: 120 },
-           { field: 'count', title: '订单购买数量', width: 120 },
-           { field: 'opt', title: '操作', width: 100 },
-           ]], //设置表头
+
+    table.on('tool(pat)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+          var data = obj.data; //获得当前行数据
+          var layEvent = obj.event; //获得 lay-event 对应的值
+          var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+          if(layEvent === 'detail'){
+            window.location.href="patinfo.html";
+          }
+    });
 
 });
 
-});
+var search = function(){
+
+    var option = {
+        where: {}
+    };
+
+    if ( $('input[name="sex"]:checked').val() != -1 ) {
+        option.where['sex'] = $('input[name="sex"]:checked').val()
+    }
+
+    if ( $('input[name="kind"]:checked').val() != -1 ) {
+            option.where['kind'] = $('input[name="kind"]:checked').val()
+    }
+
+    if ( $('input[name="age"]:checked').val() != -1 ) {
+            option.where['age'] = $('input[name="age"]:checked').val()
+        }
+
+    if ( $('input[name="count"]:checked').val() != -1) {
+            option.where['count'] = $('input[name="count"]:checked').val()
+    }
+
+
+    table.reload('pat_table', option);
+}

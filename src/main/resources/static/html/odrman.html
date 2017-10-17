@@ -39,16 +39,22 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">订单状态：</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="sex" value="0" title="全部">
-                    <input type="radio" name="sex" value="1" title="未付款">
-                    <input type="radio" name="sex" value="2" title="支付完成">
+                    <input type="radio" name="status" value="-1" title="全部" checked>
+                    <input type="radio" name="status" value="0" title="未付款">
+                    <input type="radio" name="status" value="1" title="已支付">
+                    <input type="radio" name="status" value="2" title="已完成">
+                    <input type="radio" name="status" value="99" title="已过期">
                 </div>
             </div>
-            <div class="layui-form-item filter-area-form-item">
+            <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">订单时间：</label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input" placeholder="选择订单时间查询" id="time">
+                        <input type="text" class="layui-input" placeholder="选择开始时间" id="time1">
+                    </div>
+                    <div class="layui-input-inline" style="width:auto; line-height:34px;">-</div>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" placeholder="选择结束时间" id="time2">
                     </div>
                     <label class="layui-form-label">商品名称：</label>
                     <div class="layui-input-inline">
@@ -67,14 +73,36 @@
                         <input type="text" name="pat_name" placeholder="输入居民姓名查询" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-inline"><button class="layui-btn layui-btn-small">查询</button></div>
+                <div class="layui-inline"><a class="layui-btn layui-btn-small" href="javascript: search();">查询</a></div>
             </div>
         </form>
     </div>
-    <table id="odr_table" lay-filter=""></table>
+    <table class="layui-table" lay-data="{even:true, url:'/order/listAll', page:true, id:'odr_table'}" lay-filter="odr">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id', width:90}">序号</th>
+            <th lay-data="{field:'indent_number', width:240}">订单编号</th>
+            <th lay-data="{field:'purchased_time', width:200}">购买时间</th>
+            <th lay-data="{field:'name', width:260}">服务名称</th>
+            <th lay-data="{field:'duration', width:90}">服务期限</th>
+            <th lay-data="{field:'doctor_name', width:100}">医生</th>
+            <th lay-data="{field:'patient_name', width:100}">居民</th>
+            <th lay-data="{field:'patient_phone', width:140}">居民电话</th>
+            <th lay-data="{field:'sum_count', width:90}">总次数</th>
+            <th lay-data="{field:'left_count', width:90}">剩余次数</th>
+            <th lay-data="{field:'price', width:100}">服务价格</th>
+            <th lay-data="{field:'indent_status', width:95}">订单状态</th>
+            <th lay-data="{width:80, align:'center', toolbar: '#opt'}">操作</th>
+        </tr>
+        </thead>
+    </table>
 </div>
 
-<div id="modal" class="mask">
+<script type="text/html" id="opt">
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="detail">详情</a>
+</script>
+
+<div id="modal" class="mask" hidden>
     <div class="modal-content" style="width: 900px; height: 400px;">
         <div class="modal-title">
             <div class="modal-title__text">订单详情</div>
@@ -84,50 +112,50 @@
             <div class="layui-form-item filter-area-form-item" style="margin-top: 10px;">
                 <div class="layui-inline">
                     <label class="layui-form-label">订单时间：</label>
-                    <label class="layui-form-label label-content">2017-08-22 17:22</label>
+                    <label id="purchased_time" class="layui-form-label label-content"></label>
                     <label class="layui-form-label">订单编号：</label>
-                    <label class="layui-form-label label-content">112233445566778899</label>
+                    <label id="indent_number" class="layui-form-label label-content"></label>
                     <label class="layui-form-label">订单状态：</label>
-                    <label class="layui-form-label label-content">支付成功</label>
+                    <label id="indent_status" class="layui-form-label label-content"></label>
                 </div>
             </div>
             <div class="layui-form-item filter-area-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">医生：</label>
-                    <label class="layui-form-label label-content">谢医生</label>
+                    <label id="doctor_name" class="layui-form-label label-content"></label>
                     <label class="layui-form-label">居民：</label>
-                    <label class="layui-form-label label-content">爱新觉罗哈哈</label>
+                    <label id="patient_name" class="layui-form-label label-content"></label>
                     <label class="layui-form-label">居民手机：</label>
-                    <label class="layui-form-label label-content">12345678901</label>
+                    <label id="patient_phone" class="layui-form-label label-content"></label>
                 </div>
             </div>
             <div class="layui-form-item filter-area-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">产品名称：</label>
-                    <label class="layui-form-label label-content">图文咨询</label>
+                    <label id="service_name" class="layui-form-label label-content" style="width:auto;"></label>
                     <label class="layui-form-label">服务期限：</label>
-                    <label class="layui-form-label label-content" style="width:auto;">2017-08-12 12：00 至 2017-11-12 12：00</label>
+                    <label id="service_duration" class="layui-form-label label-content"></label>
 
                 </div>
             </div>
             <div class="layui-form-item filter-area-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">总次数：</label>
-                    <label class="layui-form-label label-content2">3</label>
+                    <label id="sum_count" class="layui-form-label label-content2"></label>
                     <label class="layui-form-label">剩余次数：</label>
-                    <label class="layui-form-label label-content2">1</label>
+                    <label id="left_count" class="layui-form-label label-content2"></label>
                     <label class="layui-form-label">价格：</label>
-                    <label class="layui-form-label label-content2" style="width: 120px;">￥10000.00</label>
+                    <label id="price" class="layui-form-label label-content2" style="width: 120px;"></label>
                     <label class="layui-form-label">付款金额：</label>
-                    <label class="layui-form-label label-content2" style="width: 120px;">￥10000.00</label>
+                    <label id="pay" class="layui-form-label label-content2" style="width: 120px;"></label>
                 </div>
             </div>
             <div class="layui-form-item filter-area-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label" style="width: 130px;">医生开始服务时间：</label>
-                    <label class="layui-form-label label-content">2017-08-12 12：00</label>
+                    <label id="service_start_time" class="layui-form-label label-content"></label>
                     <label class="layui-form-label" style="width: 130px;">医生结束服务时间：</label>
-                    <label class="layui-form-label label-content">2017-11-12 12：00</label>
+                    <label id="service_end_time" class="layui-form-label label-content"></label>
                 </div>
             </div>
         </form>
@@ -139,6 +167,7 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../js/tools.js"></script>
 <script src="../js/pages/odrman.js"></script>
 </body>
 </html>

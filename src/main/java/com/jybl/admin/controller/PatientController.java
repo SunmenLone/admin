@@ -2,9 +2,12 @@ package com.jybl.admin.controller;
 
 
 
+import com.jybl.admin.entity.BloodPressureEntity;
+import com.jybl.admin.entity.HealthEntity;
 import com.jybl.admin.entity.PatientEntity;
 import com.jybl.admin.service.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,6 +64,33 @@ public class PatientController {
         map.put("msg", "");
         map.put("count", list.size());
         map.put("data", list);
+        return map;
+    }
+
+    @RequestMapping("/listDetail")
+    public Map findPatientDetail(HttpServletRequest request) {
+
+        String wechatId = "";
+
+        if (request.getParameter("wechatId") != null && request.getParameter("wechatId") != null) {
+            wechatId = request.getParameter("wechatId");
+        }
+
+        Map map = new HashMap();
+
+        PatientEntity pe = new PatientEntity();
+        pe = patientMapper.findByWechatId(wechatId);
+
+        HealthEntity he = new HealthEntity();
+        he = patientMapper.getHealthByWechatId(wechatId);
+
+        List<BloodPressureEntity> bpe = patientMapper.getBloodPressureByWechatId(wechatId);
+
+        map.put("code", 0);
+        map.put("patientInfo", pe);
+        map.put("healthInfo", he);
+        map.put("bloodPressure", bpe);
+
         return map;
     }
 

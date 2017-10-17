@@ -1,5 +1,7 @@
 package com.jybl.admin.service;
 
+import com.jybl.admin.entity.BloodPressureEntity;
+import com.jybl.admin.entity.HealthEntity;
 import com.jybl.admin.entity.PatientEntity;
 import com.jybl.admin.service.provider.PatientProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,5 +16,15 @@ public interface PatientMapper {
 
     @SelectProvider(type = PatientProvider.class, method = "selectPatient")
     List<PatientEntity> findAll(PatientEntity patientEntity, Long first, Long limit);
+
+    @Select("SELECT * FROM PATIENT_INFO WHERE WECHAT_ID = #{wechat_id}")
+    PatientEntity findByWechatId(@Param("wechat_id") String wechat_id);
+
+    @Select("SELECT * FROM HEALTH_INFO WHERE WECHAT_ID = #{wechat_id}")
+    HealthEntity getHealthByWechatId(@Param("wechat_id") String wechat_id);
+
+    @Select("SELECT * FROM BLOOD_PRESSURE WHERE WECHAT_ID = #{wechat_id}")
+    List<BloodPressureEntity> getBloodPressureByWechatId(@Param("wechat_id") String wechat_id);
+
 
 }

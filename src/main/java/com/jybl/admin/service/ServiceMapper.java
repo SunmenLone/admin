@@ -15,6 +15,15 @@ public interface ServiceMapper {
     @SelectProvider(type = ServiceProvider.class, method = "selectService")
     List<ServiceEntity> findAll(ServiceEntity serviceEntity, Long first, Long limit);
 
+    @Select("SELECT * FROM SERVICE WHERE NAME like #{name} LIMIT #{first}, #{limit}")
+    List<ServiceEntity> findByName(@Param("name") String name, @Param("first") Long first, @Param("limit") Long limit);
+
+    @Select("SELECT * FROM SERVICE WHERE STATUS = #{status} LIMIT #{first}, #{limit}")
+    List<ServiceEntity> findByStatus(@Param("status") Integer status, @Param("first") Long first, @Param("limit") Long limit);
+
+    @Select("SELECT * FROM SERVICE WHERE NAME like #{name} AND STATUS = #{status} LIMIT #{first}, #{limit}")
+    List<ServiceEntity> findByNameAndStatus(@Param("name") String name, @Param("status") Integer status, @Param("first") Long first, @Param("limit") Long limit);
+
     @Insert("INSERT INTO SERVICE (NAME, PRICE, COUNT, DURATION, CONTENT, KIND, RISK_LEVEL_ID) VALUES (#{name}, #{price}, #{count}, #{duration}, #{content}, #{kind}, #{riskLevelId})")
     int addService(ServiceEntity serviceEntity);
 

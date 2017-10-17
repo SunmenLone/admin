@@ -30,12 +30,14 @@ public class PatientEntity implements Serializable{
 
     private String kind;
 
+    private Float prob;
+
     private Integer count = -1;
 
     public PatientEntity() {
  }
 
- public PatientEntity(Long id, String name, String id_card, String sex, Integer age, String phone, String address, String detailed_address, String wechat_id, String head_pic, String kind, Integer count) {
+ public PatientEntity(Long id, String name, String id_card, String sex, Integer age, String phone, String address, String detailed_address, String wechat_id, String head_pic, String kind, Integer count, Float prob) {
   this.id = id;
   this.name = name;
   this.id_card = id_card;
@@ -48,6 +50,8 @@ public class PatientEntity implements Serializable{
   this.head_pic = head_pic;
   this.kind = kind;
   this.count = count;
+  this.prob = prob;
+
  }
 
  public Long getId() {
@@ -136,6 +140,14 @@ public class PatientEntity implements Serializable{
 
  public void setKind(String kind) {
   this.kind = kind;
+ }
+
+ public Float getProb() {
+  return prob;
+ }
+
+ public void setProb(Float prob) {
+  this.prob = prob;
  }
 
  public Integer getCount() {

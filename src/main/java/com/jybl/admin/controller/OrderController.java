@@ -94,4 +94,50 @@ public class OrderController {
         return map;
     }
 
+    @RequestMapping("/listOne")
+    public Map findOrderWithPatient(HttpServletRequest request) {
+        Long first = 1L, limit = 30L;
+
+        if (request.getParameter("page") != null && request.getParameter("limit") != null) {
+            limit = Long.valueOf(request.getParameter("limit"));
+            first = (Long.valueOf(request.getParameter("page")) - 1) * limit;
+        }
+
+        String wechatId = "";
+        if (request.getParameter("wechatId") != null && request.getParameter("wechatId").length() > 0) {
+            wechatId = request.getParameter("wechatId");
+        }
+
+        List<OrderEntity> list = orderMapper.findByWechatId(wechatId, first, limit);
+
+        int i = 1;
+        for (OrderEntity orderEntity : list) {
+            orderEntity.setId(Integer.toUnsignedLong(i));
+            String time = orderEntity.getPurchased_time();
+            orderEntity.setPurchased_time(time.substring(0, time.length() - 2));
+            switch(Integer.valueOf(orderEntity.getIndent_status())) {
+                case 0:
+                    orderEntity.setIndent_status("未付款");
+                    break;
+                case 1:
+                    orderEntity.setIndent_status("已支付");
+                    break;
+                case 2:
+                    orderEntity.setIndent_status("已完成");
+                    break;
+                case 99:
+                    orderEntity.setIndent_status("已过期");
+                    break;
+            }
+            i++;
+        }
+
+        Map map = new HashMap();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", orderMapper.getCountByWechatId(wechatId));
+        map.put("data", list);
+        return map;
+    }
+
 }

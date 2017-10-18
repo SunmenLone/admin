@@ -33,8 +33,6 @@ public class OrderProvider {
 
         sb.append(" LIMIT " + first.toString() + ", " + limit.toString());
 
-        System.out.println(sb.toString());
-
         return sb.toString();
 
     }

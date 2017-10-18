@@ -3,6 +3,7 @@ package com.jybl.admin.service;
 import com.jybl.admin.entity.DoctorEntity;
 import com.jybl.admin.service.provider.DoctorProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 

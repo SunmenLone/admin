@@ -35,6 +35,25 @@ public class DoctorController {
 
         DoctorEntity de = new DoctorEntity();
 
+        if (request.getParameter("sex") != null && request.getParameter("sex").length() > 0) {
+            de.setSex(request.getParameter("sex"));
+        }
+
+        if (request.getParameter("title") != null && request.getParameter("title").length() > 0) {
+            de.setTitle(request.getParameter("title"));
+        }
+
+        if (request.getParameter("verify") != null && request.getParameter("verify").length() > 0) {
+            de.setVerify(request.getParameter("verify"));
+        }
+
+        if (request.getParameter("name") != null && request.getParameter("name").length() > 0) {
+            de.setName(request.getParameter("name"));
+        }
+
+        if (request.getParameter("department") != null && request.getParameter("department").length() > 0) {
+            de.setDepartment(request.getParameter("department"));
+        }
 
         List<DoctorEntity> list = doctorMapper.findAll(de, first, limit);
 

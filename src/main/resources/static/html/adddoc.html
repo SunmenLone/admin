@@ -26,7 +26,7 @@
     <div class="sub-title">
         <span class="layui-breadcrumb">
             <a href="docman.html">医生管理</a>
-            <a><cite style="color:#009688;">新增医生</cite></a>
+            <a><cite id="cur_cite" style="color:#009688;">新增医生</cite></a>
         </span>
     </div>
     <form class="layui-form" action="">
@@ -185,8 +185,18 @@
 </div>
 
 
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../js/tools.js"></script>
 <script src="../js/pages/adddoc.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        if ( getUrlParam('edit') == 1 ) {
+            $('#cur_cite').html('编辑医生');
+        }
+    })
+
+</script>
 </body>
 </html>

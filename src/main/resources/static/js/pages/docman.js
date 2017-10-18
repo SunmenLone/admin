@@ -14,6 +14,7 @@ layui.use('table', function(){
     table = layui.table;
     //执行渲染
     table.render({
+        id: 'doc_table',
         elem: '#doc_table',
         url:  '/doctor/listAll',
         page: true,
@@ -40,11 +41,11 @@ layui.use('table', function(){
         console.log(data);
 
         if(layEvent === 'service'){
-
+            window.location.href="docser.html?phone=" + data.phone;
         } else if(layEvent === 'order') {
-
+            window.location.href="docodr.html?phone=" + data.phone;
         } else if(layEvent === 'edit') {
-
+            window.location.href="adddoc.html?phone=" + data.phone + "&edit=1";
         }
 
     });
@@ -61,17 +62,22 @@ var search = function(){
         option.where['sex'] = $('input[name="sex"]:checked').val()
     }
 
-    if ( $('input[name="kind"]:checked').val() != -1 ) {
-            option.where['kind'] = $('input[name="kind"]:checked').val()
+    if ( $('input[name="title"]:checked').val() != -1 ) {
+        option.where['title'] = $('input[name="title"]:checked').val()
     }
 
-    if ( $('input[name="age"]:checked').val() != -1 ) {
-            option.where['age'] = $('input[name="age"]:checked').val()
+    if ( $('input[name="verify"]:checked').val() != -1 ) {
+        option.where['verify'] = $('input[name="verify"]:checked').val()
+    }
+
+    if ( $('input[name="name"]').val() != '') {
+            option.where['name'] = $('input[name="name"]').val();
         }
 
-    if ( $('input[name="count"]:checked').val() != -1) {
-            option.where['count'] = $('input[name="count"]:checked').val()
+    if ( $('#department option:selected').val() != '') {
+        option.where['department'] = $('#department option:selected').html();
     }
+
 
 
     table.reload('doc_table', option);

@@ -22,7 +22,7 @@ public class DoctorProvider {
         }
 
         if (doctorEntity.getName() != null) {
-            sb.append(" AND A.NAME LIKE '%" + doctorEntity + "%'");
+            sb.append(" AND A.NAME LIKE '%" + doctorEntity.getName() + "%'");
         }
 
         if (doctorEntity.getDepartment() != null) {

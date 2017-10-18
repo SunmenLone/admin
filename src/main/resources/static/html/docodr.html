@@ -6,6 +6,26 @@
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/common.css">
 
+    <style>
+
+        .layui-form-item .layui-inline {
+            margin-right: 0;
+        }
+
+        .label-content {
+            padding-left: 0;
+            width: 175px;
+            text-align: left;
+        }
+
+        .label-content2 {
+            padding-left: 0;
+            text-align: left;
+        }
+
+
+    </style>
+
 </head>
 <body>
 <div class="body-main">
@@ -15,13 +35,79 @@
             <a><cite style="color:#009688;">订单详情</cite></a>
         </span>
     </div>
-    <table id="docodr_table" lay-filter=""></table>
+    <table id="odr_table" lay-filter="odr"></table>
 </div>
 
+<script type="text/html" id="opt">
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="detail">详情</a>
+</script>
 
+<div id="modal" class="mask" hidden>
+    <div class="modal-content" style="width: 900px; height: 400px;">
+        <div class="modal-title">
+            <div class="modal-title__text">订单详情</div>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#modal').attr('hidden','true');"></img>
+        </div>
+        <form class="layui-form" action="" style="color: #666;">
+            <div class="layui-form-item filter-area-form-item" style="margin-top: 10px;">
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单时间：</label>
+                    <label id="purchased_time" class="layui-form-label label-content"></label>
+                    <label class="layui-form-label">订单编号：</label>
+                    <label id="indent_number" class="layui-form-label label-content"></label>
+                    <label class="layui-form-label">订单状态：</label>
+                    <label id="indent_status" class="layui-form-label label-content"></label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">医生：</label>
+                    <label id="doctor_name" class="layui-form-label label-content"></label>
+                    <label class="layui-form-label">居民：</label>
+                    <label id="patient_name" class="layui-form-label label-content"></label>
+                    <label class="layui-form-label">居民手机：</label>
+                    <label id="patient_phone" class="layui-form-label label-content"></label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品名称：</label>
+                    <label id="service_name" class="layui-form-label label-content" style="width:auto;"></label>
+                    <label class="layui-form-label">服务期限：</label>
+                    <label id="service_duration" class="layui-form-label label-content"></label>
+
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">总次数：</label>
+                    <label id="sum_count" class="layui-form-label label-content2"></label>
+                    <label class="layui-form-label">剩余次数：</label>
+                    <label id="left_count" class="layui-form-label label-content2"></label>
+                    <label class="layui-form-label">价格：</label>
+                    <label id="price" class="layui-form-label label-content2" style="width: 120px;"></label>
+                    <label class="layui-form-label">付款金额：</label>
+                    <label id="pay" class="layui-form-label label-content2" style="width: 120px;"></label>
+                </div>
+            </div>
+            <div class="layui-form-item filter-area-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 130px;">医生开始服务时间：</label>
+                    <label id="service_start_time" class="layui-form-label label-content"></label>
+                    <label class="layui-form-label" style="width: 130px;">医生结束服务时间：</label>
+                    <label id="service_end_time" class="layui-form-label label-content"></label>
+                </div>
+            </div>
+        </form>
+        <div style="position: absolute; left: 0; right: 0; top: 330px; bottom: 15px; text-align: center;">
+            <button class="layui-btn" onclick="$('#modal').attr('hidden','true');">关闭</button>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../js/tools.js"></script>
 <script src="../js/pages/docodr.js"></script>
 </body>
 </html>

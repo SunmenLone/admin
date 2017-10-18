@@ -197,7 +197,7 @@
 
         table.render({
             elem: '#odr_table',
-            url: '/order/listOne?wechatId=' + getUrlParam('wechatId'),
+            url: '/order/listPatient?wechatId=' + getUrlParam('wechatId'),
             even: true,
             page: true,
             cols: [[{field:'id', title:'序号', width:90},

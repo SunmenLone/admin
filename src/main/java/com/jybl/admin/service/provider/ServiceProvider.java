@@ -34,7 +34,7 @@ public class ServiceProvider {
                     SET("content = #{content}");
                 }
 
-                if (serviceEntity.getRiskLevelId() != null) {
+                if (serviceEntity.getRisk_level_id() != null) {
                     SET("risk_level_id = #{riskLevelId}");
                 }
 

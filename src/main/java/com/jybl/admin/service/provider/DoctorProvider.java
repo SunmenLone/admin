@@ -7,7 +7,7 @@ public class DoctorProvider {
     public String selectDoctor(DoctorEntity doctorEntity, Long first, Long limit) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT A.*, COUNT(B.INDENT_NUMBER) AS COUNT FROM DOCTOR_INFO A LEFT JOIN PURCHASED_SERVICE B ON A.PHONE = B.DOCTOR_PHONE WHERE 1=1");
+        sb.append("SELECT A.PHONE, A.NAME, A.SEX, A.TITLE, A.DEPARTMENT, A.VERIFY, A.DATETIME, COUNT(B.INDENT_NUMBER) AS COUNT FROM DOCTOR_INFO A LEFT JOIN PURCHASED_SERVICE B ON A.PHONE = B.DOCTOR_PHONE WHERE 1=1");
 
         if( doctorEntity.getSex() != null) {
             sb.append(" AND A.SEX='" + doctorEntity.getSex() +"'");

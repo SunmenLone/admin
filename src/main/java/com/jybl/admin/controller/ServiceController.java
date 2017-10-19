@@ -70,7 +70,7 @@ public class ServiceController {
             ServiceEntity serviceEntity = new ServiceEntity();
             serviceEntity.setName(request.getParameter("name"));
             serviceEntity.setContent(request.getParameter("content"));
-            serviceEntity.setRiskLevelId(request.getParameter("riskLevelId"));
+            serviceEntity.setRisk_level_id(request.getParameter("riskLevelId"));
             serviceEntity.setKind(request.getParameter("kind"));
             serviceEntity.setDuration(request.getParameter("duration"));
             serviceEntity.setCount(Integer.valueOf(request.getParameter("count")));
@@ -111,7 +111,7 @@ public class ServiceController {
             }
 
             if ( request.getParameter("riskLevelId") != null ) {
-                serviceEntity.setRiskLevelId(request.getParameter("riskLevelId"));
+                serviceEntity.setRisk_level_id(request.getParameter("riskLevelId"));
             }
 
             if ( request.getParameter("kind") != null ) {

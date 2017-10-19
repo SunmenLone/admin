@@ -4,8 +4,9 @@ layui.use('element', function(){
 
 });
 
+var form;
 layui.use('form', function(){
-  var form = layui.form;
+  form = layui.form;
 
 });
 
@@ -22,10 +23,11 @@ layui.use('table', function(){
 
       if(layEvent === 'edit'){
 
-        console.log(data);
-
         $('input[name="a_name"]').val(data.name);
         $('#a_content').val(data.content);
+
+        $('#a_kind option[value="' + data.risk_level_id + '"]').attr('selected', true);
+        form.render('select');
 
         $('input[name="a_duration"]').val(data.duration);
         $('input[name="a_count"]').val(data.count);
@@ -95,7 +97,8 @@ var toAdd = function(){
 
     $('input[name="a_name"]').val('');
     $('#a_content').val('');
-
+    $('#a_kind option[value=""]').attr('selected', true);
+    form.render('select');
     $('input[name="a_duration"]').val('');
     $('input[name="a_count"]').val('');
     $('input[name="a_price"]').val('');

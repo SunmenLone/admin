@@ -11,7 +11,7 @@ public class ServiceEntity {
 	private int count = -1;//次数
 	private String duration;//期限
 	private String content;//内容
-	private String riskLevelId;
+	private String risk_level_id;
 	private String kind;//适用人群
 	private String time;
 	private String status;
@@ -19,7 +19,7 @@ public class ServiceEntity {
 	public ServiceEntity() {
 
 	}
-	public ServiceEntity(Long id, String name, String price, int count, String duration, String content, String kind, String time) {
+	public ServiceEntity(Long id, String name, String price, int count, String duration, String content, String kind, String time, String risk_level_id, String status) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,6 +29,8 @@ public class ServiceEntity {
 		this.content = content;
 		this.kind = kind;
 		this.time = time;
+		this.risk_level_id = risk_level_id;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -79,14 +81,6 @@ public class ServiceEntity {
 		this.content = content;
 	}
 
-	public String getRiskLevelId() {
-		return riskLevelId;
-	}
-
-	public void setRiskLevelId(String riskLevelId) {
-		this.riskLevelId = riskLevelId;
-	}
-
 	public String getKind() {
 		return kind;
 	}
@@ -110,5 +104,17 @@ public class ServiceEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getRisk_level_id() {
+		return risk_level_id;
+	}
+
+	public void setRisk_level_id(String risk_level_id) {
+		this.risk_level_id = risk_level_id;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

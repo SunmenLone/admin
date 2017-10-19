@@ -45,21 +45,12 @@ public class DoctorEntity {
 	private String QRcode_pic;//二维码
 	private String head_pic;//头像
 	private String verify;//认证
-	
-	
-	public String getVerify() {
-		return verify;
-	}
-
-
-	public void setVerify(String verify) {
-		this.verify = verify;
-	}
-
+	private String datetime;
+	private Integer count = 0;
 
 	public DoctorEntity(Long id, String name, String phone, String password, String sex, String practice_code,
                         String hospital, String department, String title, String practice_pic, String adept, String experience,
-                        String qRcode_pic, String head_pic, String verify) {
+                        String qRcode_pic, String head_pic, String verify, String datetime, Integer count) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -76,6 +67,8 @@ public class DoctorEntity {
 		this.QRcode_pic = qRcode_pic;
 		this.head_pic = head_pic;
 		this.verify = verify;
+		this.datetime = datetime;
+		this.count = count;
 	}
 	
 	
@@ -168,6 +161,27 @@ public class DoctorEntity {
 		this.head_pic = head_pic;
 	}
 
-	
-	
+	public String getVerify() {
+		return verify;
+	}
+
+	public void setVerify(String verify) {
+		this.verify = verify;
+	}
+
+	public String getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 }

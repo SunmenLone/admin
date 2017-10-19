@@ -34,10 +34,12 @@ public class PatientEntity implements Serializable{
 
     private Integer count = -1;
 
+    private String datetime;
+
     public PatientEntity() {
  }
 
- public PatientEntity(Long id, String name, String id_card, String sex, Integer age, String phone, String address, String detailed_address, String wechat_id, String head_pic, String kind, Integer count, Float prob) {
+ public PatientEntity(Long id, String name, String id_card, String sex, Integer age, String phone, String address, String detailed_address, String wechat_id, String head_pic, String kind, Integer count, Float prob, String datetime) {
   this.id = id;
   this.name = name;
   this.id_card = id_card;
@@ -51,7 +53,7 @@ public class PatientEntity implements Serializable{
   this.kind = kind;
   this.count = count;
   this.prob = prob;
-
+  this.datetime = datetime;
  }
 
  public Long getId() {
@@ -156,5 +158,13 @@ public class PatientEntity implements Serializable{
 
  public void setCount(Integer count) {
   this.count = count;
+ }
+
+ public String getDatetime() {
+  return datetime;
+ }
+
+ public void setDatetime(String datetime) {
+  this.datetime = datetime;
  }
 }

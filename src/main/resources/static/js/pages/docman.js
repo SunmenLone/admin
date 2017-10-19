@@ -28,7 +28,7 @@ layui.use('table', function(){
                 { toolbar: '#ser', title: '服务', align:'center', width: 80 },
                 { field: 'verify', title: '认证状态', width: 120 },
                 { field: 'count', title: '订单总数', sort: true, width: 120 },
-                { field: 'time', title: '加入时间', sort: true, width: 180 },
+                { field: 'datetime', title: '加入时间', sort: true, width: 180 },
                 { toolbar: '#opt', title: '操作', align:'center', width: 120 },
                ]]
     });
@@ -37,8 +37,6 @@ layui.use('table', function(){
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值
         var tr = obj.tr; //获得当前行 tr 的DOM对象
-
-        console.log(data);
 
         if(layEvent === 'service'){
             window.location.href="docser.html?phone=" + data.phone;

@@ -78,11 +78,9 @@ public class PatientController {
 
         Map map = new HashMap();
 
-        PatientEntity pe = new PatientEntity();
-        pe = patientMapper.findByWechatId(wechatId);
+        PatientEntity pe = patientMapper.findByWechatId(wechatId);
 
-        HealthEntity he = new HealthEntity();
-        he = patientMapper.getHealthByWechatId(wechatId);
+        HealthEntity he = patientMapper.getHealthByWechatId(wechatId);
 
         List<BloodPressureEntity> bpe = patientMapper.getBloodPressureByWechatId(wechatId);
 

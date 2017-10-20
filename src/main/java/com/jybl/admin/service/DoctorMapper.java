@@ -20,4 +20,14 @@ public interface DoctorMapper {
 
     @Insert("INSERT INTO DOCTOR_INFO (PHONE, PASSWORD, NAME, SEX, PRACTICE_CODE, HOSPITAL, TITLE, DEPARTMENT, HEAD_PIC, PRACTICE_PIC, ADEPT, EXPERIENCE, VERIFY) VALUES (#{phone}, #{password}, #{name}, #{sex}, #{practice_code}, #{hospital}, #{title}, #{department}, #{head_pic}, #{practice_pic}, #{adept}, #{experience}, #{verify})")
     Integer addDoctor(DoctorEntity doctorEntity);
+
+    @UpdateProvider(type = DoctorProvider.class, method = "updateDoctor")
+    Integer editDoctor(DoctorEntity doctorEntity);
+
+    @Update("UPDATE DOCTOR_INFO SET VERIFY = #{verify} WHERE PHONE = #{phone}")
+    Integer verifyDoctor(@Param("phone") String phone, @Param("verify") String verify);
+
+    @Delete("DELETE FROM DOCTOR_INFO WHERE PHONE = #{phone}")
+    Integer deleteDoctor(@Param("phone") String phone);
+
 }

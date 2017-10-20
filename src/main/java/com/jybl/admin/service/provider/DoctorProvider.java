@@ -1,6 +1,7 @@
 package com.jybl.admin.service.provider;
 
 import com.jybl.admin.entity.DoctorEntity;
+import org.apache.ibatis.jdbc.SQL;
 
 public class DoctorProvider {
 
@@ -33,5 +34,55 @@ public class DoctorProvider {
 
         return sb.toString();
 
+    }
+
+    public String updateDoctor(DoctorEntity doctorEntity) {
+        return new SQL(){
+            {
+                UPDATE("DOCTOR_INFO");
+
+                if (doctorEntity.getName() != null) {
+                    SET("name = #{name}");
+                }
+
+                if (doctorEntity.getSex() != null) {
+                    SET("sex = #{sex}");
+                }
+
+                if (doctorEntity.getPractice_code() != null) {
+                    SET("PRACTICE_CODE = #{practice_code}");
+                }
+
+                if (doctorEntity.getHospital() != null) {
+                    SET("HOSPITAL = #{hospital}");
+                }
+
+                if (doctorEntity.getTitle() != null) {
+                    SET("TITLE = #{title}");
+                }
+
+                if (doctorEntity.getDepartment() != null) {
+                    SET("DEPARTMENT = #{department}");
+                }
+
+                if (doctorEntity.getHead_pic() != null) {
+                    SET("HEAD_PIC = #{head_pic}");
+                }
+
+                if (doctorEntity.getPractice_pic() != null) {
+                    SET("PRACTICE_PIC = #{practice_pic}");
+                }
+
+                if (doctorEntity.getAdept() != null) {
+                    SET("ADEPT = #{adept}");
+                }
+
+                if (doctorEntity.getExperience() != null) {
+                    SET("EXPERIENCE = #{experience}");
+                }
+
+                WHERE("PHONE = #{phone}");
+            }
+        }.toString();
     }
 }

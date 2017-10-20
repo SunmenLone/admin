@@ -165,4 +165,82 @@ public class DoctorController {
         return map;
     }
 
+    @RequestMapping("/edit")
+    public Map editDoctorInfo (HttpServletRequest request) {
+
+        DoctorEntity de = new DoctorEntity();
+
+        de.setPhone(request.getParameter("phone"));
+
+        if (request.getParameter("password") != null ) {
+            de.setPassword(request.getParameter("password"));
+        }
+
+        if (request.getParameter("name") != null ) {
+            de.setName(request.getParameter("name"));
+        }
+
+        if (request.getParameter("sex") != null) {
+            de.setSex(request.getParameter("sex"));
+        }
+
+        if (request.getParameter("practiceCode") != null) {
+            de.setPractice_code(request.getParameter("practiceCode"));
+        }
+
+        if (request.getParameter("hospital") != null) {
+            de.setHospital(request.getParameter("hospital"));
+        }
+
+        if (request.getParameter("title") != null) {
+            de.setTitle(request.getParameter("title"));
+        }
+
+        if (request.getParameter("department") != null) {
+            de.setDepartment(request.getParameter("department"));
+        }
+
+        if (request.getParameter("headPic") != null) {
+            de.setHead_pic(request.getParameter("headPic"));
+        }
+
+        if (request.getParameter("practicePic") != null) {
+            de.setPractice_pic(request.getParameter("practicePic"));
+        }
+
+        if (request.getParameter("adept") != null) {
+            de.setAdept(request.getParameter("adept"));
+        }
+
+        if (request.getParameter("experience") != null) {
+            de.setExperience(request.getParameter("experience"));
+        }
+
+        doctorMapper.editDoctor(de);
+
+        Map map = new HashMap();
+        map.put("code", 0);
+        return map;
+    }
+
+    @RequestMapping("/verify")
+    public Map verifyDoctor (HttpServletRequest request) {
+
+        doctorMapper.verifyDoctor(request.getParameter("phone"), "已认证");
+
+        Map map = new HashMap();
+        map.put("code", 0);
+        return map;
+    }
+
+    @RequestMapping("/del")
+    public Map deleteDoctor (HttpServletRequest request) {
+
+        doctorMapper.deleteDoctor(request.getParameter("phone"));
+
+        Map map = new HashMap();
+        map.put("code", 0);
+        return map;
+    }
+
 }

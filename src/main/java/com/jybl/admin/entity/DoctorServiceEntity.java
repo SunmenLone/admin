@@ -18,27 +18,30 @@ primary key (id)
  **/
 
 public class DoctorServiceEntity {
-    private int id;
+    private Long id;
     private String doctor_phone;
-    private int service_id;
+    private Long service_id;
     private String service_name;
     private String service_price;
-    private int service_count;
+    private Integer service_count;
     private String service_duration;
     private String added_time;
     private int added_status;
 
+    private String kind;
     private Integer purchased_count = 0;
+
+    private Long rid;
 
 
     public DoctorServiceEntity() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,11 +53,11 @@ public class DoctorServiceEntity {
         this.doctor_phone = doctor_phone;
     }
 
-    public int getService_id() {
+    public Long getService_id() {
         return service_id;
     }
 
-    public void setService_id(int service_id) {
+    public void setService_id(Long service_id) {
         this.service_id = service_id;
     }
 
@@ -74,11 +77,11 @@ public class DoctorServiceEntity {
         this.service_price = service_price;
     }
 
-    public int getService_count() {
+    public Integer getService_count() {
         return service_count;
     }
 
-    public void setService_count(int service_count) {
+    public void setService_count(Integer service_count) {
         this.service_count = service_count;
     }
 
@@ -106,11 +109,27 @@ public class DoctorServiceEntity {
         this.added_status = added_status;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
     public Integer getPurchased_count() {
         return purchased_count;
     }
 
     public void setPurchased_count(Integer purchased_count) {
         this.purchased_count = purchased_count;
+    }
+
+    public Long getRid() {
+        return rid;
+    }
+
+    public void setRid(Long rid) {
+        this.rid = rid;
     }
 }

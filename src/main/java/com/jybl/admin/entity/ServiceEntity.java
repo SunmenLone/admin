@@ -15,11 +15,12 @@ public class ServiceEntity {
 	private String kind;//适用人群
 	private String time;
 	private String status;
+	private Long rid;
 
 	public ServiceEntity() {
 
 	}
-	public ServiceEntity(Long id, String name, String price, int count, String duration, String content, String kind, String time, String risk_level_id, String status) {
+	public ServiceEntity(Long id, String name, String price, int count, String duration, String content, String kind, String time, String risk_level_id, String status, Long rid) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,6 +32,7 @@ public class ServiceEntity {
 		this.time = time;
 		this.risk_level_id = risk_level_id;
 		this.status = status;
+		this.rid = rid;
 	}
 
 	public Long getId() {
@@ -116,5 +118,13 @@ public class ServiceEntity {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Long getRid() {
+		return rid;
+	}
+
+	public void setRid(Long rid) {
+		this.rid = rid;
 	}
 }

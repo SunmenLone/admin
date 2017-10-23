@@ -147,7 +147,7 @@
                                 axisTick: {
                                     alignWithLabel: true
                                 },
-                                data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',]
+                                data: []
                             }
                         ],
                         yAxis: [
@@ -182,18 +182,49 @@
                             {
                                 name:'订单数量',
                                 type:'bar',
-                                data:[48, 72, 256, 196, 48, 72, 256, 196, 48, 72, 256, 196]
+                                data:[]
                             },
                             {
                                 name:'订单额度',
                                 type:'bar',
                                 yAxisIndex: 1,
-                                data:[128, 96, 72, 88, 128, 96, 72, 88, 128, 96, 72, 88]
+                                data:[]
                             }
                         ]
                     };
+
+
+    $(function(){
+
+        $.ajax({
+            url:'/statistic/listAll',
+            success: function(res) {
+                console.log('success');
+
+                var oov = res.orderOverview;
+                $('#monthsCount').html(oov[0].count);
+                $('#monthsTotal').html(oov[0].total);
+                $('#dayCount').html(oov[1].count);
+                $('#dayTotal').html(oov[1].total);
+
+                var oes = res.orderStatistic;
+                var months = [];
+                var counts = [];
+                var totals = [];
+                for (var i = 0; i < oes.length; i++){
+                    months.push(oes[i].month);
+                    counts.push(oes[i].count);
+                    totals.push(oes[i].total);
+                }
+
+                option.xAxis[0].data = months;
+                option.series[0].data = counts;
+                option.series[1].data = totals;
+
                 bar2.setOption(option);
+            }
+        })
 
 
-
+    })
 

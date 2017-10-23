@@ -15,27 +15,39 @@
             <a><cite style="color:#009688;">编辑医生服务</cite></a>
         </span>
     </div>
-    <table id="docser_table" lay-filter=""></table>
+    <div style="text-align:right;">
+        <button id="add" class="layui-btn" onclick="javascript:toAdd();">添加服务</button>
+    </div>
+    <table id="docser_table" lay-filter="docser"></table>
+
+    <script type="text/html" id="opt">
+        {{#  if(d.added_status == 0){ }}
+        <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="enable">上架</a>
+        {{#  } else { }}
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="disable">下架</a>
+        {{#  } }}
+    </script>
+
 </div>
 
-<div id="downmodal" class="mask" hidden>
+<div id="infomodal" class="mask" hidden>
     <div class="modal-content" style="width: 360px; height: 240px;">
         <div class="modal-title">
             <div class="modal-title__text">提示</div>
-            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#downmodal').attr('hidden','true');"></img>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#infomodal').attr('hidden','true');"></img>
         </div>
         <div style="text-align: center; margin-top: 64px;">
             <img style="display: inline-block; width: 32px; height: 32px;" src="../imgs/prompt.png">
-            <div style="display: inline-block; line-height: 32px; margin-left: 5px;">确定下架服务?</div>
+            <div style="display: inline-block; line-height: 32px; margin-left: 5px;" id="prompt"></div>
         </div>
         <div style="text-align: center; margin-top: 48px;">
-            <button class="layui-btn">确定</button>
-            <button class="layui-btn layui-btn-primary" onclick="$('#downmodal').attr('hidden','true');">取消</button>
+            <button class="layui-btn" id="confirm">确定</button>
+            <button class="layui-btn layui-btn-primary" onclick="$('#infomodal').attr('hidden','true');">取消</button>
         </div>
     </div>
 </div>
 
-<div id="upmodal" class="mask" hidden>
+<!--<div id="upmodal" class="mask" hidden>
     <div class="modal-content" style="width: 400px; height: 360px;">
         <div class="modal-title">
             <div class="modal-title__text">服务上架</div>
@@ -75,70 +87,22 @@
             <button class="layui-btn layui-btn-primary" onclick="$('#upmodal').attr('hidden','true');">取消</button>
         </div>
     </div>
-</div>
+</div>-->
 
-<div id="editmodal" class="mask" hidden>
-    <div class="modal-content" style="width: 480px; height: 500px;">
-        <div class="modal-title">
-            <div class="modal-title__text">新增服务</div>
-            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#editmodal').attr('hidden','true');"></img>
+<div id="addmodal" class="mask" hidden>
+    <div class="modal-content" style="width: 900px; height: 600px; padding: 10px;">
+        <p class="layui-elem-quote">选择服务</p>
+        <table id="ser_table" lay-filter="ser"></table>
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="layui-btn" id="add_confirm">添加</button>
+            <button class="layui-btn layui-btn-primary" onclick="$('#addmodal').attr('hidden','true');">取消</button>
         </div>
-        <form class="layui-form" action="">
-            <div class="layui-form-item" style="margin-top: 20px;">
-                <label class="layui-form-label">服务名称：</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required" placeholder="请输入服务名称" autocomplete="off" class="layui-input" style="width: 350px;">
-                </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">服务内容：</label>
-                <div class="layui-input-block">
-                    <textarea name="content" required placeholder="请输入服务内容" class="layui-textarea" style="width: 350px; "></textarea>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">适用人群：</label>
-                <div class="layui-input-inline">
-                    <select name="type" lay-verify="required">
-                        <option value=""></option>
-                        <option value="0">所有人群</option>
-                        <option value="1">患病风险人群</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">服务期限：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="duration" required lay-verify="required" placeholder="请输入服务期限" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">个月</div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">服务次数：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="times" required lay-verify="required" placeholder="请输入服务次数" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">次</div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">指导价格：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="price" required lay-verify="required" placeholder="请输入指导价格" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">CNY</div>
-            </div>
-            <div class="layui-form-item" style="margin-top: 20px;">
-                <div style="text-align: center;">
-                    <button class="layui-btn" lay-submit="" lay-filter="formDemo">添加</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../js/tools.js"></script>
 <script src="../js/pages/docser.js"></script>
 </body>
 </html>

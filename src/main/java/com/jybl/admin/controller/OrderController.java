@@ -1,8 +1,7 @@
 package com.jybl.admin.controller;
 
-
 import com.jybl.admin.entity.OrderEntity;
-import com.jybl.admin.service.OrderMapper;
+import com.jybl.admin.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ import java.util.Map;
 public class OrderController {
 
     @Autowired
-    OrderMapper orderMapper;
+    OrderService orderService;
 
     @RequestMapping("/listAll")
     public Map findAllOrder(HttpServletRequest request) {
@@ -62,34 +61,12 @@ public class OrderController {
             }
         }
 
-        List<OrderEntity> list = orderMapper.findAll(oe, first, limit);
-
-        int i = 1;
-        for (OrderEntity orderEntity : list) {
-            orderEntity.setId(Integer.toUnsignedLong(i));
-            String time = orderEntity.getPurchased_time();
-            orderEntity.setPurchased_time(time.substring(0, time.length() - 2));
-            switch(Integer.valueOf(orderEntity.getIndent_status())) {
-                case 0:
-                    orderEntity.setIndent_status("未付款");
-                    break;
-                case 1:
-                    orderEntity.setIndent_status("已支付");
-                    break;
-                case 2:
-                    orderEntity.setIndent_status("已完成");
-                    break;
-                case 99:
-                    orderEntity.setIndent_status("已过期");
-                    break;
-            }
-            i++;
-        }
+        List<OrderEntity> list = orderService.findAll(oe, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", orderMapper.getCount());
+        map.put("count", orderService.getCount());
         map.put("data", list);
         return map;
     }
@@ -108,34 +85,12 @@ public class OrderController {
             wechatId = request.getParameter("wechatId");
         }
 
-        List<OrderEntity> list = orderMapper.findByWechatId(wechatId, first, limit);
-
-        int i = 1;
-        for (OrderEntity orderEntity : list) {
-            orderEntity.setId(Integer.toUnsignedLong(i)) ;
-            String time = orderEntity.getPurchased_time();
-            orderEntity.setPurchased_time(time.substring(0, time.length() - 2));
-            switch(Integer.valueOf(orderEntity.getIndent_status())) {
-                case 0:
-                    orderEntity.setIndent_status("未付款");
-                    break;
-                case 1:
-                    orderEntity.setIndent_status("已支付");
-                    break;
-                case 2:
-                    orderEntity.setIndent_status("已完成");
-                    break;
-                case 99:
-                    orderEntity.setIndent_status("已过期");
-                    break;
-            }
-            i++;
-        }
+        List<OrderEntity> list = orderService.findByWechatId(wechatId, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", orderMapper.getCountByWechatId(wechatId));
+        map.put("count", orderService.getCountByWechatId(wechatId));
         map.put("data", list);
         return map;
     }
@@ -154,7 +109,7 @@ public class OrderController {
             phone = request.getParameter("phone");
         }
 
-        List<OrderEntity> list = orderMapper.findByPhone(phone, first, limit);
+        List<OrderEntity> list = orderService.findByPhone(phone, first, limit);
 
         int i = 1;
         for (OrderEntity orderEntity : list) {
@@ -181,7 +136,7 @@ public class OrderController {
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", orderMapper.getCountByPhone(phone));
+        map.put("count", orderService.getCountByPhone(phone));
         map.put("data", list);
         return map;
     }

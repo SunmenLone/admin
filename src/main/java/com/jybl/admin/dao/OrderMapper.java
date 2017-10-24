@@ -1,7 +1,7 @@
-package com.jybl.admin.service;
+package com.jybl.admin.dao;
 
 import com.jybl.admin.entity.OrderEntity;
-import com.jybl.admin.service.provider.OrderProvider;
+import com.jybl.admin.dao.provider.OrderProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

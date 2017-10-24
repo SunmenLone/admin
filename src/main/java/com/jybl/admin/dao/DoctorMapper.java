@@ -1,7 +1,7 @@
-package com.jybl.admin.service;
+package com.jybl.admin.dao;
 
+import com.jybl.admin.dao.provider.DoctorProvider;
 import com.jybl.admin.entity.DoctorEntity;
-import com.jybl.admin.service.provider.DoctorProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

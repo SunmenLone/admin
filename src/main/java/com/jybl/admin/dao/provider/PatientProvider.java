@@ -1,4 +1,4 @@
-package com.jybl.admin.service.provider;
+package com.jybl.admin.dao.provider;
 
 import com.jybl.admin.entity.PatientEntity;
 

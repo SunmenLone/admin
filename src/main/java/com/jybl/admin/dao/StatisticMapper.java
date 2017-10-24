@@ -1,9 +1,9 @@
-package com.jybl.admin.service;
+package com.jybl.admin.dao;
 
+import com.jybl.admin.dao.provider.StatisticProvider;
 import com.jybl.admin.entity.OrderStatisticEntity;
 import com.jybl.admin.entity.NameValueEntity;
 import com.jybl.admin.entity.UserStatisticEntity;
-import com.jybl.admin.service.provider.StatisticProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;

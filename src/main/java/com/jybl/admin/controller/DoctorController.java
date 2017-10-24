@@ -1,29 +1,14 @@
 package com.jybl.admin.controller;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.jybl.admin.entity.DoctorEntity;
-import com.jybl.admin.entity.OrderEntity;
-import com.jybl.admin.service.DoctorMapper;
-import com.jybl.admin.service.OrderMapper;
-import org.apache.tomcat.util.http.fileupload.util.Streams;
+import com.jybl.admin.dao.DoctorMapper;
+import com.jybl.admin.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +18,7 @@ import java.util.Map;
 public class DoctorController {
 
     @Autowired
-    DoctorMapper doctorMapper;
+    DoctorService doctorService;
 
     @RequestMapping("/listAll")
     public Map findAllDoctor(HttpServletRequest request) {
@@ -67,20 +52,12 @@ public class DoctorController {
             de.setDepartment(request.getParameter("department"));
         }
 
-        List<DoctorEntity> list = doctorMapper.findAll(de, first, limit);
-
-        int i = 1;
-        for (DoctorEntity doctorEntity : list) {
-            doctorEntity.setId(Integer.toUnsignedLong(i));
-            String time = doctorEntity.getDatetime();
-            doctorEntity.setDatetime(time.substring(0, time.length() - 2));
-            i++;
-        }
+        List<DoctorEntity> list = doctorService.findAll(de, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", doctorMapper.getCount());
+        map.put("count", doctorService.getCount());
         map.put("data", list);
         return map;
     }
@@ -93,7 +70,7 @@ public class DoctorController {
             phone = request.getParameter("phone");
         }
 
-        DoctorEntity de = doctorMapper.findByPhone(phone);
+        DoctorEntity de = doctorService.findByPhone(phone);
 
         Map map = new HashMap();
         map.put("code", 0);
@@ -158,7 +135,7 @@ public class DoctorController {
             de.setVerify(request.getParameter("verify"));
         }
 
-        doctorMapper.addDoctor(de);
+        doctorService.addDoctor(de);
 
         Map map = new HashMap();
         map.put("code", 0);
@@ -216,7 +193,7 @@ public class DoctorController {
             de.setExperience(request.getParameter("experience"));
         }
 
-        doctorMapper.editDoctor(de);
+        doctorService.editDoctor(de);
 
         Map map = new HashMap();
         map.put("code", 0);
@@ -226,7 +203,7 @@ public class DoctorController {
     @RequestMapping("/verify")
     public Map verifyDoctor (HttpServletRequest request) {
 
-        doctorMapper.verifyDoctor(request.getParameter("phone"), "已认证");
+        doctorService.verifyDoctor(request.getParameter("phone"), "已认证");
 
         Map map = new HashMap();
         map.put("code", 0);
@@ -236,7 +213,7 @@ public class DoctorController {
     @RequestMapping("/del")
     public Map deleteDoctor (HttpServletRequest request) {
 
-        doctorMapper.deleteDoctor(request.getParameter("phone"));
+        doctorService.deleteDoctor(request.getParameter("phone"));
 
         Map map = new HashMap();
         map.put("code", 0);

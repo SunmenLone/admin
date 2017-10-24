@@ -1,13 +1,10 @@
 package com.jybl.admin.controller;
 
-
-
 import com.jybl.admin.entity.BloodPressureEntity;
 import com.jybl.admin.entity.HealthEntity;
 import com.jybl.admin.entity.PatientEntity;
-import com.jybl.admin.service.PatientMapper;
+import com.jybl.admin.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +18,7 @@ import java.util.Map;
 public class PatientController {
 
     @Autowired
-    PatientMapper patientMapper;
+    PatientService patientService;
 
     @RequestMapping("/listAll")
     public Map findAllPatient(HttpServletRequest request) {
@@ -51,18 +48,12 @@ public class PatientController {
             pe.setCount(Integer.valueOf(request.getParameter("count")));
         }
 
-        List<PatientEntity> list = patientMapper.findAll(pe, first, limit);
-
-        int i = 1;
-        for (PatientEntity patientEntity : list) {
-            patientEntity.setId(Integer.toUnsignedLong(i));
-            i++;
-        }
+        List<PatientEntity> list = patientService.findAll(pe, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", list.size());
+        map.put("count", patientService.getCount());
         map.put("data", list);
         return map;
     }
@@ -78,11 +69,11 @@ public class PatientController {
 
         Map map = new HashMap();
 
-        PatientEntity pe = patientMapper.findByWechatId(wechatId);
+        PatientEntity pe = patientService.findByWechatId(wechatId);
 
-        HealthEntity he = patientMapper.getHealthByWechatId(wechatId);
+        HealthEntity he = patientService.getHealthByWechatId(wechatId);
 
-        List<BloodPressureEntity> bpe = patientMapper.getBloodPressureByWechatId(wechatId);
+        List<BloodPressureEntity> bpe = patientService.getBloodPressureByWechatId(wechatId);
 
         map.put("code", 0);
         map.put("patientInfo", pe);

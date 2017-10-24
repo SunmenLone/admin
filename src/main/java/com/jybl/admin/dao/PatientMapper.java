@@ -1,9 +1,9 @@
-package com.jybl.admin.service;
+package com.jybl.admin.dao;
 
+import com.jybl.admin.dao.provider.PatientProvider;
 import com.jybl.admin.entity.BloodPressureEntity;
 import com.jybl.admin.entity.HealthEntity;
 import com.jybl.admin.entity.PatientEntity;
-import com.jybl.admin.service.provider.PatientProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +13,9 @@ import java.util.List;
 
 @Mapper
 public interface PatientMapper {
+
+    @Select("SELECT COUNT(*) FROM PATIENT_INFO")
+    Integer getCount();
 
     @SelectProvider(type = PatientProvider.class, method = "selectPatient")
     List<PatientEntity> findAll(PatientEntity patientEntity, Long first, Long limit);

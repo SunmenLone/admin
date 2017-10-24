@@ -2,11 +2,10 @@ package com.jybl.admin.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jybl.admin.entity.DoctorServiceEntity;
 import com.jybl.admin.entity.ServiceEntity;
-import com.jybl.admin.service.ServiceMapper;
+import com.jybl.admin.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +21,7 @@ import java.util.Map;
 public class ServiceController {
 
     @Autowired
-    ServiceMapper serviceMapper;
+    ServiceService serviceService;
 
     @RequestMapping("/listAll")
     public Map findAllService(HttpServletRequest request) {
@@ -44,23 +43,12 @@ public class ServiceController {
             se.setStatus(request.getParameter("status"));
         }
 
-        List<ServiceEntity> list = serviceMapper.findAll(se, first, limit);
-
-        int i = 1;
-        for (ServiceEntity serviceEntity : list) {
-            if (serviceEntity.getStatus().equals("1")) {
-                serviceEntity.setStatus("已激活");
-            } else {
-                serviceEntity.setStatus("冻结");
-            }
-            serviceEntity.setRid(Integer.toUnsignedLong(i));
-            i++;
-        }
+        List<ServiceEntity> list = serviceService.findAll(se, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", serviceMapper.getCount());
+        map.put("count", serviceService.getCount());
         map.put("data", list);
         return map;
     }
@@ -81,7 +69,7 @@ public class ServiceController {
             serviceEntity.setCount(Integer.valueOf(request.getParameter("count")));
             serviceEntity.setPrice(request.getParameter("price"));
 
-            serviceMapper.addService(serviceEntity);
+            serviceService.addService(serviceEntity);
 
             map.put("code", 0);
 
@@ -135,7 +123,7 @@ public class ServiceController {
                 serviceEntity.setPrice(request.getParameter("price"));
             }
 
-            serviceMapper.updateService(serviceEntity);
+            serviceService.updateService(serviceEntity);
 
             map.put("code", 0);
 
@@ -158,7 +146,7 @@ public class ServiceController {
 
             Long id = Long.valueOf(request.getParameter("id"));
 
-            serviceMapper.deleteService(id);
+            serviceService.deleteService(id);
 
             map.put("code", 0);
 
@@ -184,7 +172,7 @@ public class ServiceController {
 
             Integer status = Integer.valueOf(request.getParameter("status"));
 
-            serviceMapper.updateServiceStatus(id, status);
+            serviceService.updateServiceStatus(id, status);
 
             map.put("code", 0);
 
@@ -215,22 +203,12 @@ public class ServiceController {
             phone = request.getParameter("phone");
         }
 
-        List<DoctorServiceEntity> list = serviceMapper.findDoctorService(phone, first, limit);
-
-        int i = 1;
-        for (DoctorServiceEntity doctorServiceEntity : list) {
-            if (doctorServiceEntity.getAdded_status() == 0) {
-                doctorServiceEntity.setAdded_time("已下架");
-            }
-            doctorServiceEntity.setRid(doctorServiceEntity.getId());
-            doctorServiceEntity.setId(Integer.toUnsignedLong(i));
-            i++;
-        }
+        List<DoctorServiceEntity> list = serviceService.findDoctorService(phone, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", serviceMapper.getDocServiceCount(phone));
+        map.put("count", serviceService.getDocServiceCount(phone));
         map.put("data", list);
         return map;
     }
@@ -253,7 +231,7 @@ public class ServiceController {
                 time = sdf.format(new Date());
             }
 
-            serviceMapper.updateDocServiceStatus(id, status, time);
+            serviceService.updateDocServiceStatus(id, status, time);
 
             map.put("code", 0);
 
@@ -283,18 +261,12 @@ public class ServiceController {
             phone = request.getParameter("phone");
         }
 
-        List<ServiceEntity> list = serviceMapper.findAllAvailable(phone, first, limit);
-
-        int i = 1;
-        for (ServiceEntity serviceEntity : list) {
-            serviceEntity.setRid(Integer.toUnsignedLong(i));
-            i++;
-        }
+        List<ServiceEntity> list = serviceService.findAllAvailable(phone, first, limit);
 
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", serviceMapper.getAvailableCount(phone));
+        map.put("count", serviceService.getAvailableCount(phone));
         map.put("data", list);
         return map;
     }
@@ -325,7 +297,7 @@ public class ServiceController {
                 doctorServiceEntity.setService_duration(se.getDuration());
                 doctorServiceEntity.setAdded_time(time);
 
-                serviceMapper.addDocService(doctorServiceEntity);
+                serviceService.addDocService(doctorServiceEntity);
             }
 
 

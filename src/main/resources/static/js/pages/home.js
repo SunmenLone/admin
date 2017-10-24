@@ -3,7 +3,7 @@
         });
 
         var pie = echarts.init(document.getElementById('pie'));
-        var option = {
+        var optionPie = {
             title : {
                 text: '居民健康状况',
                 x:'center'
@@ -15,7 +15,7 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['高危人群','中危人群','低危人群','健康人群','未评估']
+                data: ['极高危人群' ,'高危人群','中危人群','低危人群','健康人群','未评估']
             },
             series: [
                 {
@@ -28,34 +28,35 @@
                             show: false,
                             position: 'center'
                         },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '24',
-                            fontWeight: 'bold'
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '24',
+                                fontWeight: 'bold'
+                            }
                         }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:135, name:'高危人群'},
-                    {value:234, name:'中危人群'},
-                    {value:1548, name:'低危人群'},
-                    {value:335, name:'健康人群'},
-                    {value:310, name:'未评估'}
-                ]
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:0, name:'极高危人群'},
+                        {value:0, name:'高危人群'},
+                        {value:0, name:'中危人群'},
+                        {value:0, name:'低危人群'},
+                        {value:0, name:'健康人群'},
+                        {value:0, name:'未评估'}
+                    ]
                 }
             ]
         };
-        pie.setOption(option);
+
 
         var bar1 = echarts.init(document.getElementById('bar1'));
         var colors = ['#27b0b0', '#675bba']
-        var option = {
+        var optionBar1 = {
                 color: colors,
                 tooltip: {
                     trigger: 'axis',
@@ -76,7 +77,7 @@
                         axisTick: {
                             alignWithLabel: true
                         },
-                        data: ['第1周','第2周','第3周','第4周']
+                        data: []
                     }
                 ],
                 yAxis: [
@@ -111,22 +112,21 @@
                     {
                         name:'医生',
                         type:'bar',
-                        data:[48, 72, 256, 196]
+                        data:[]
                     },
                     {
                         name:'居民',
                         type:'bar',
                         yAxisIndex: 1,
-                        data:[128, 96, 72, 88]
+                        data:[]
                     }
                 ]
             };
-        bar1.setOption(option);
 
 
         var bar2 = echarts.init(document.getElementById('bar2'));
                 var colors = ['#27b0b0', '#675bba']
-                var option = {
+                var optionBar2 = {
                         color: colors,
                         tooltip: {
                             trigger: 'axis',
@@ -199,7 +199,43 @@
         $.ajax({
             url:'/statistic/listAll',
             success: function(res) {
-                console.log('success');
+
+                var uov = res.userOverview;
+                $('#dayPatient').html(uov[0].patient_count);
+                $('#dayDoctor').html(uov[0].doctor_count);
+                $('#patientTotal').html(uov[1].patient_count);
+                $('#doctorTotal').html(uov[1].doctor_count);
+
+                var ues = res.userStatistic;
+                var months1 = [];
+                var patientCounts = [];
+                var doctorCounts = [];
+                for (var i = 0; i < ues.length; i++){
+                    months1.push(ues[i].month);
+                    patientCounts.push(ues[i].patient_count);
+                    doctorCounts.push(ues[i].doctor_count);
+                }
+
+                optionBar1.xAxis[0].data = months1;
+                optionBar1.series[0].data = doctorCounts;
+                optionBar1.series[1].data = patientCounts;
+
+                bar1.setOption(optionBar1);
+
+                var gs = res.groupStatistic;
+                var gsd = optionPie.series[0].data;
+
+                for (var i = 0; i < gs.length; i++) {
+                    for (var j = 0; j < gsd.length; j++) {
+                        if (gs[i].name == gsd[j].name) {
+                            gsd[j].value = gs[i].value;
+                            break;
+                        }
+                    }
+                }
+                optionPie.series[0].data = gsd;
+                pie.setOption(optionPie);
+
 
                 var oov = res.orderOverview;
                 $('#monthsCount').html(oov[0].count);
@@ -208,20 +244,20 @@
                 $('#dayTotal').html(oov[1].total);
 
                 var oes = res.orderStatistic;
-                var months = [];
+                var months2 = [];
                 var counts = [];
                 var totals = [];
                 for (var i = 0; i < oes.length; i++){
-                    months.push(oes[i].month);
+                    months2.push(oes[i].month);
                     counts.push(oes[i].count);
                     totals.push(oes[i].total);
                 }
 
-                option.xAxis[0].data = months;
-                option.series[0].data = counts;
-                option.series[1].data = totals;
+                optionBar2.xAxis[0].data = months2;
+                optionBar2.series[0].data = counts;
+                optionBar2.series[1].data = totals;
 
-                bar2.setOption(option);
+                bar2.setOption(optionBar2);
             }
         })
 

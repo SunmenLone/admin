@@ -23,9 +23,11 @@ public class StatisticController {
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("orderStatistic", statisticMapper.get12MonthStatistic());
-        map.put("orderOverview", statisticMapper.getOverviewStatistic());
-
+        map.put("orderStatistic", statisticMapper.get12MonthOrderStatistic());
+        map.put("orderOverview", statisticMapper.getOverviewOrderStatistic());
+        map.put("groupStatistic", statisticMapper.getRangeGroup());
+        map.put("userStatistic", statisticMapper.get12MonthUserStatistic());
+        map.put("userOverview", statisticMapper.getOverviewUserStatistic());
 
         return map;
 

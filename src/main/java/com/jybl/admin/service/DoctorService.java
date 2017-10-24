@@ -22,7 +22,7 @@ public class DoctorService {
         int i = 1;
         for (DoctorEntity de : list) {
             de.setId(Integer.toUnsignedLong(i));
-            String time = doctorEntity.getDatetime();
+            String time = de.getDatetime();
             de.setDatetime(time.substring(0, time.length() - 2));
             i++;
         }

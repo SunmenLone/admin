@@ -19,7 +19,7 @@ public interface ServiceMapper {
     @Insert("INSERT INTO SERVICE (NAME, PRICE, COUNT, DURATION, CONTENT, KIND, RISK_LEVEL_ID) VALUES (#{name}, #{price}, #{count}, #{duration}, #{content}, #{kind}, #{riskLevelId})")
     Integer addService(ServiceEntity serviceEntity);
 
-    @SelectProvider(type = ServiceProvider.class, method = "updateService")
+    @UpdateProvider(type = ServiceProvider.class, method = "updateService")
     Integer updateService(ServiceEntity serviceEntity);
 
     @Update("UPDATE SERVICE SET STATUS = #{status} WHERE ID = #{id}")

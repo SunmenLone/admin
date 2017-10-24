@@ -15,7 +15,7 @@ layui.use('table', function(){
     url: '/service/listDocService?phone=' + getUrlParam('phone'),
     even: true,
     page: true,
-    cols: [[{ field: 'id', title: '服务名称', width: 100 },
+    cols: [[{ field: 'rid', title: '序号', width: 100 },
            { field: 'service_name', title: '服务名称', width: 240 },
            { field: 'service_duration', title: '服务期限', width: 100 },
            { field: 'kind', title: '适用人群', width: 120 },
@@ -36,13 +36,13 @@ layui.use('table', function(){
           if(layEvent === 'enable'){
                 $('#prompt').html('确定上架此项服务?');
                 $('#confirm').on('click', function(){
-                    changeStatus(data.rid, 1);
+                    changeStatus(data.id, 1);
                 });
                 $('#infomodal').removeAttr('hidden');
           } else if(layEvent === 'disable'){
                 $('#prompt').html('确定下架此项服务?');
                 $('#confirm').on('click', function(){
-                    changeStatus(data.rid, 0);
+                    changeStatus(data.id, 0);
                 });
                 $('#infomodal').removeAttr('hidden');
           }

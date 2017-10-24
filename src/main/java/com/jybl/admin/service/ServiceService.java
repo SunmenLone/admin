@@ -65,8 +65,7 @@ public class ServiceService {
             if (doctorServiceEntity.getAdded_status() == 0) {
                 doctorServiceEntity.setAdded_time("已下架");
             }
-            doctorServiceEntity.setRid(doctorServiceEntity.getId());
-            doctorServiceEntity.setId(Integer.toUnsignedLong(i));
+            doctorServiceEntity.setRid(Integer.toUnsignedLong(i));
             i++;
         }
 

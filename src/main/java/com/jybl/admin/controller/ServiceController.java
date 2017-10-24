@@ -88,6 +88,8 @@ public class ServiceController {
     @RequestMapping("/edit")
     public Map editService(HttpServletRequest request) {
 
+        System.out.println(request.getQueryString());
+
         Map map = new HashMap();
 
         try {

@@ -1,10 +1,14 @@
 package com.jybl.admin.controller;
 
+import com.jybl.admin.entity.User;
+import com.jybl.admin.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,14 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
+
 @RestController
+@RequestMapping("/")
 public class AdminController {
 
+    Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-    @RequestMapping("/submitLogin")
+    @Autowired
+    UserService userService;
+
+    @RequestMapping("submitLogin")
     public Map login(HttpServletRequest request){
-
-        Logger logger = LoggerFactory.getLogger(AdminController.class);
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -63,6 +72,39 @@ public class AdminController {
             token.clear();
             map.put("code", -1);
         }
+
+        return map;
+    }
+
+    @RequestMapping("signOut")
+    public Map userSignOut(HttpServletRequest request){
+
+        Map resultMap = new HashMap();
+        try {
+            SecurityUtils.getSubject().logout();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return resultMap;
+    }
+
+    @RequestMapping("user/info")
+    public Map getUserInfo(HttpServletRequest request){
+
+        User user = null;
+
+        Subject subject = SecurityUtils.getSubject();
+        PrincipalCollection collection = subject.getPrincipals();
+        if (null != collection && !collection.isEmpty()) {
+            user = (User) collection.iterator().next();
+        }
+
+        Map map = new HashMap();
+
+        user = userService.getByUsername(user.getUsername());
+
+        map.put("code", 0);
+        map.put("user", user);
 
         return map;
     }

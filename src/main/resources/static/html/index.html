@@ -50,14 +50,14 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                    <img id="useravatar" src="" class="layui-nav-img">
+                    <span id="username"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd id="dd"><a href="javascript: $('#modal').removeAttr('hidden'); $('#dd').removeClass('layui-this');">帐号信息</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="javascript: logout();">退了</a></li>
         </ul>
     </div>
 
@@ -138,6 +138,38 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/pages/index.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+        $.ajax({
+            url: '/user/info',
+            data: {
+            },
+            success: function(res){
+                $('#useravatar').attr('src', res.user.avatar);
+                $('#username').html(res.user.username);
+            }
+        })
+
+    })
+
+    var logout = function() {
+
+        $.ajax({
+            url: '/signOut',
+            data: {
+            },
+            complete: function(){
+                window.location.href="login.html";
+            }
+        })
+    }
+
+
+</script>
+
 </body>
 
 </html>

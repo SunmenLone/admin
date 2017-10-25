@@ -50,7 +50,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width: 420px !important;">
                     <img style="height: 28px; width: 28px; margin: 5px;" src="../imgs/people_fill.png">
-                    <input type="text" name="account" autocomplete="off" placeholder="输入登录帐号" class="layui-input">
+                    <input type="text" name="username" autocomplete="off" placeholder="输入登录帐号" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -68,7 +68,7 @@
             </div>
             <div class="layui-form-item">
                 <div style="display: flex; display: -webkit-flex; justify-content: center; margin-top: 50px;">
-                    <button class="layui-btn" lay-submit="" lay-filter="">登录</button>
+                    <a class="layui-btn" href="javascript: submitLogin();">登录</a>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -76,6 +76,7 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/layui/layui.js"></script>
 <script src="/js/pages/login.js"></script>
 </body>

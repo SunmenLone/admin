@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
-
 @RestController
 @RequestMapping("/")
 public class AdminController {
@@ -32,10 +30,15 @@ public class AdminController {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        System.out.println(request.getParameter("rememberMe"));
+        Boolean rememberMe = Boolean.getBoolean(request.getParameter("rememberMe"));
+
+        logger.info("rememberMe:" + rememberMe);
 
         Map map = new HashMap();
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        token.setRememberMe(true);
         Subject currentUser = SecurityUtils.getSubject();
 
         try {
@@ -44,33 +47,36 @@ public class AdminController {
             //所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法
             logger.info("对用户[" + username + "]进行登录验证..验证开始");
             currentUser.login(token);
+            map.put("code", 0);
             logger.info("对用户[" + username + "]进行登录验证..验证通过");
         } catch (UnknownAccountException uae) {
             logger.info("对用户[" + username + "]进行登录验证..验证未通过,未知账户");
+            map.put("code", -1);
             //redirectAttributes.addFlashAttribute("message", "未知账户");
         } catch (IncorrectCredentialsException ice) {
             logger.info("对用户[" + username + "]进行登录验证..验证未通过,错误的凭证");
+            map.put("code", -1);
             //redirectAttributes.addFlashAttribute("message", "密码不正确");
         } catch (LockedAccountException lae) {
             logger.info("对用户[" + username + "]进行登录验证..验证未通过,账户已锁定");
+            map.put("code", -1);
             //redirectAttributes.addFlashAttribute("message", "账户已锁定");
         } catch (ExcessiveAttemptsException eae) {
             logger.info("对用户[" + username + "]进行登录验证..验证未通过,错误次数过多");
+            map.put("code", -1);
             //redirectAttributes.addFlashAttribute("message", "用户名或密码错误次数过多");
         } catch (AuthenticationException ae) {
             //通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景
             logger.info("对用户[" + username + "]进行登录验证..验证未通过,堆栈轨迹如下");
+            map.put("code", -1);
             ae.printStackTrace();
             //redirectAttributes.addFlashAttribute("message", "用户名或密码不正确");
         }
         //验证是否登录成功
-        if (currentUser.isAuthenticated()) {
-            logger.info("用户[" + username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
-            map.put("code", 0);
-            map.put("message", "登录成功");
+        if (currentUser.isAuthenticated() && (Integer)map.get("code") == 0) {
+
         } else {
             token.clear();
-            map.put("code", -1);
         }
 
         return map;
@@ -107,6 +113,39 @@ public class AdminController {
         map.put("user", user);
 
         return map;
+    }
+
+    @RequestMapping("user/update")
+    public Map updateUserInfo(HttpServletRequest request){
+
+        Map map = new HashMap();
+        User user = new User();
+
+        user.setUsername(request.getParameter("username"));
+
+        if (request.getParameter("alias") != null) {
+            user.setAlias(request.getParameter("alias"));
+        }
+
+        if (request.getParameter("password") != null) {
+            user.setPassword(request.getParameter("password"));
+        }
+
+        if (request.getParameter("avatar") != null) {
+            user.setAvatar(request.getParameter("avatar"));
+        }
+
+        userService.updateUserInfo(user);
+
+        map.put("code", 0);
+
+        return map;
+    }
+
+    @RequestMapping("user/getSmsCode")
+    public Map getSmsCode(HttpServletRequest request) {
+
+        return userService.sendMsg(request);
     }
 
 }

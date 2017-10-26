@@ -19,6 +19,11 @@ public class User implements Serializable {
     private String username;
 
     /**
+     * 昵称
+     */
+    private String alias;
+
+    /**
      * 邮箱
      */
     private String email;

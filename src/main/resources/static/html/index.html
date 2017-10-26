@@ -101,18 +101,18 @@
         <form class="layui-form" action="" style="margin-left: 60px;">
             <div class="layui-form-item filter-area-form-item" style="margin-top: 30px;">
                 <label class="layui-form-label">帐号：</label>
-                <label class="layui-form-label" style="width: auto; text-align:left; padding-left: 0;">123456</label>
+                <label class="layui-form-label" style="width: auto; text-align:left; padding-left: 0;" id="account"></label>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">昵称：</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="nickname" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+                    <input type="text" name="alias" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">登录密码：</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请输入登录密码" autocomplete="off" class="layui-input">
+                    <input type="text" name="password" required lay-verify="required" placeholder="请输入登录密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -125,9 +125,9 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="formDemo">确认</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <div class="layui-input-block" style="margin-top: 30px;">
+                    <a class="layui-btn" lay-submit="" lay-filter="" href="javascript: modifyUserInfo();">修改</a>
+                    <a class="layui-btn layui-btn-primary" href="javascript: $('#modal').attr('hidden', true);">关闭</a>
                 </div>
             </div>
         </form>
@@ -136,39 +136,9 @@
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/pages/index.js"></script>
-
-<script type="text/javascript">
-
-    $(function(){
-
-        $.ajax({
-            url: '/user/info',
-            data: {
-            },
-            success: function(res){
-                $('#useravatar').attr('src', res.user.avatar);
-                $('#username').html(res.user.username);
-            }
-        })
-
-    })
-
-    var logout = function() {
-
-        $.ajax({
-            url: '/signOut',
-            data: {
-            },
-            complete: function(){
-                window.location.href="login.html";
-            }
-        })
-    }
-
-
-</script>
 
 </body>
 

@@ -7,13 +7,13 @@ layui.use('form', function(){
 
 });
 
-var countdown = 10;
+var countdown = 60;
 
 function setTime(val) {
     if (countdown == 0) {
         val.removeClass('layui-btn-disabled');
         val.html('获取验证码');
-        countdown = 10;
+        countdown = 60;
     } else {
         val.addClass('layui-btn-disabled');
         val.html('重新发送(' + countdown + ')');
@@ -24,6 +24,7 @@ function setTime(val) {
     }
 }
 
+var hash = '', tamp = 0;
 var getSmsCode = function() {
 
     $.ajax({
@@ -34,10 +35,49 @@ var getSmsCode = function() {
         success: function(res){
             if(res.code == 0) {
                 setTime($('#get_code'));
+                hash = res.hash;
+                tamp = res.tamp;
             }
         }
     })
 
+}
+
+var resetPwd = function() {
+
+    if ( $('input[name="code"]').val() == '') {
+
+            layer.open({
+                title: '提示',
+                content: '请输入验证码'
+            });
+            return;
+        }
+
+    if ( $('input[name="newpwd"]').val() != $('input[name="cfmpwd"]').val() ) {
+
+        layer.open({
+            title: '提示',
+            content: '两次密码不一致，请重新输入'
+        });
+        return;
+    }
+
+    $.ajax({
+        url: '/user/resetPassword',
+        data: {
+            phone: $('input[name="phone"]').val(),
+            msgNum: $('input[name="code"]').val(),
+            password: $('input[name="newpwd"]').val(),
+            hash: hash,
+            tamp: tamp
+        },
+        success: function(res){
+            if(res.code == 0) {
+
+            }
+        }
+    })
 
 
 }

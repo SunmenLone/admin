@@ -148,4 +148,9 @@ public class AdminController {
         return userService.sendMsg(request);
     }
 
+    @RequestMapping("user/resetPassword")
+    public Map resetUserPassword(HttpServletRequest request) {
+        return userService.resetPwd(request);
+    }
+
 }

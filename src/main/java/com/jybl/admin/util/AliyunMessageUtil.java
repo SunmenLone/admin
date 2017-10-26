@@ -9,9 +9,6 @@ import com.aliyuncs.profile.IClientProfile;
 
 import java.util.Map;
 
-/**
- * Created by Ai on 2017/8/22.
- */
 public class AliyunMessageUtil {
     private static final String product = "Dysmsapi";
     //产品域名,开发者无需替换

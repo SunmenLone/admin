@@ -66,14 +66,19 @@ layui.use('element', function(){
 
         var logout = function() {
 
-            $.ajax({
-                url: '/signOut',
-                data: {
-                },
-                complete: function(){
-                    window.location.href="../login.html";
-                }
-            })
+            layer.confirm('确认退出帐号 ' + $('#username').html() + '?', function(index){
+
+                $.ajax({
+                    url: '/signOut',
+                    data: {
+                    },
+                    complete: function(){
+                        window.location.href="../login.html";
+                    }
+                })
+
+                layer.close(index);
+            });
         }
 
         var client = null;
@@ -154,7 +159,16 @@ layui.use('element', function(){
                 url: '/user/update',
                 data: param,
                 success: function(res) {
-                    console.log('update user');
+
+                    if (res.code == 0) {
+                        $('#username').html(alias);
+                        layer.open({
+                            title: '提示',
+                            content: '修改用户信息成功'
+                            });
+                    } else {
+
+                    }
 
                     avatar = null;
                     aliasChange = false;

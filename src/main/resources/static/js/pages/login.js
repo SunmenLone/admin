@@ -35,7 +35,10 @@ var submitLogin = function() {
                 }
                 window.location.href="/html/index.html";
             } else {
-                console.log('login fail');
+                layer.open({
+                  title: '提示',
+                  content: res.msg
+                });
             }
         }
     })

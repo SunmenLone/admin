@@ -51,7 +51,7 @@ public class ShiroRealm extends AuthorizingRealm {
         User user = userService.getByUsername(token.getUsername());
         if(user==null){
             logger.error("用户 { "+token.getUsername()+" } 不存在 ");
-            throw new AccountException("账户不存在");
+            throw new UnknownAccountException("账户不存在");
         }
         if(user.getStatus()==0){
             logger.error("用户 { "+token.getUsername()+" } 被禁止登录 ");

@@ -17,6 +17,7 @@
             height:99%;
             border:0;
             background-color: #fff;
+            bottom:
         }
 
         .layui-upload-img {
@@ -25,13 +26,37 @@
             margin: 0 10px 10px 0;
         }
 
+        .layui-nav {
+            background-color: #27b0b0;
+        }
+
+        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+            background-color: #666;
+        }
+
+        .layui-nav-tree .layui-nav-item a:hover {
+            background-color: #38c1c1;
+        }
+
+        .layui-nav-itemed .layui-nav-child {
+            background-color: rgba(0, 0, 0, 0.1)!important;
+        }
+
+        .layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a,.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-this>a:hover {
+            background-color: #55d9d9;
+        }
+
+        .layui-nav-tree .layui-nav-bar {
+            background-color:#55d9d9;
+        }
+
     </style>
 
 </head>
 
-<body class="layui-layout-body">
+<body class="layui-layout-body" style="background-color:#27b0b0;">
 <div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
+    <div class="layui-header" style="background-color:#fff;">
         <div class="layui-logo">佳医比邻</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
@@ -49,39 +74,39 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img id="useravatar" src="" class="layui-nav-img">
+                <a style="color:#333;" href="javascript:;">
+                    <img id="useravatar" src="" class="layui-nav-img" style="border: 1px solid #bbb;">
                     <span id="username"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd id="dd"><a href="javascript: $('#modal').removeAttr('hidden'); $('#dd').removeClass('layui-this');">帐号信息</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript: logout();">退了</a></li>
+            <li class="layui-nav-item"><a style="color:#333;" href="javascript: logout();">退出登录</a></li>
         </ul>
     </div>
 
-    <div class="layui-side layui-bg-black">
+    <div class="layui-side" style="top:70px;">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul id="left_nav" class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a href="javascript:$('#ifm').attr('src', 'home.html');">首页</a></li>
-                <li class="layui-nav-item"><a href="javascript:$('#ifm').attr('src', 'docman.html');">医生管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:$('#ifm').attr('src', 'serman.html');">服务管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:$('#ifm').attr('src', 'patman.html');">居民管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:$('#ifm').attr('src', 'odrman.html');">订单管理</a></li>
+                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'home.html');">首页</a></li>
+                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'docman.html');">医生管理</a></li>
+                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'serman.html');">服务管理</a></li>
+                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'patman.html');">居民管理</a></li>
+                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'odrman.html');">订单管理</a></li>
                 <li class="layui-nav-item">
-                    <a>发布管理</a>
+                    <a style="color:#fff;">发布管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:$('#ifm').attr('src', 'pubman.html');">资讯管理</a></dd>
-                        <dd><a href="javascript:$('#ifm').attr('src', 'addpub.html');">发布资讯</a></dd>
+                        <dd><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'pubman.html');">资讯管理</a></dd>
+                        <dd><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'addpub.html');">发布资讯</a></dd>
                     </dl>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="layui-body background-grey">
+    <div class="layui-body background-grey" style="top:70px;">
         <!-- 内容主体区域 -->
         <iframe id="ifm" src="home.html"></iframe>
     </div>

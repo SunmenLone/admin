@@ -30,15 +30,13 @@ public class AdminController {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(request.getParameter("rememberMe"));
-        Boolean rememberMe = Boolean.getBoolean(request.getParameter("rememberMe"));
 
-        logger.info("rememberMe:" + rememberMe);
+        Integer rememberMe = Integer.valueOf(request.getParameter("rememberMe"));
 
         Map map = new HashMap();
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        token.setRememberMe(true);
+        token.setRememberMe( rememberMe == 1 );
         Subject currentUser = SecurityUtils.getSubject();
 
         try {

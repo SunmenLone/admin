@@ -11,17 +11,24 @@ var submitLogin = function() {
 
     SetCookie('username', username);
 
+    var param = {
+        username: username,
+        password: password
+    }
+
+    if ( $('input[name="remember"]').is(':checked') ) {
+        param['rememberMe'] = 1;
+    } else {
+        param['rememberMe'] = 0;
+    }
+
 
     $.ajax({
         url: '/submitLogin',
-        data: {
-            username: username,
-            password: password,
-            rememberMe: $('input[name="rememberMe"]').is(':checked')
-        },
+        data: param,
         success: function(res){
             if (res.code == 0) {
-                if ($('input[name="rememberMe"]').is(':checked')) {
+                if ($('input[name="remember"]').is(':checked')) {
                     SetCookie('password', password);
                 } else {
                     SetCookie('password', '');

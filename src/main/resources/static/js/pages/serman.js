@@ -42,30 +42,26 @@ layui.use('table', function(){
 
       } else if(layEvent === 'del'){ //删除
 
-        layer.confirm('真的删除行么', function(index){
-          obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-          layer.close(index);
-          //向服务端发送删除指令
-
-          del(data.id);
-
+        $('#confirm').unbind('click').removeAttr('onclick').click(function(){
+            obj.del();
+            del(data.id);
         });
+
+        showModal('确认删除服务?');
 
       } else if(layEvent === 'disable'){
 
-        $('#prompt').html('确定冻结此项服务?');
-        $('#confirm').on('click', function(){
+        $('#confirm').unbind('click').removeAttr('onclick').click(function(){
             changeStatus(data.id, 0);
         })
-        $('#infomodal').removeAttr('hidden');
+        showModal('确定冻结此项服务?');
 
       } else if(layEvent === 'enable'){
 
-        $('#prompt').html('确定激活此项服务?');
-        $('#confirm').on('click', function(){
+        $('#confirm').unbind('click').removeAttr('onclick').click(function(){
             changeStatus(data.id, 1);
         })
-        $('#infomodal').removeAttr('hidden');
+        showModal('确定激活此项服务?');
 
       }
     });
@@ -108,66 +104,84 @@ var toAdd = function(){
 
 var add = function(){
 
-    $.ajax({
-        url: '/service/add',
-        data: {
-            name: $('input[name="a_name"]').val(),
-            content: $('#a_content').val(),
-            riskLevelId: $('#a_kind option:selected').val(),
-            kind: $('#a_kind option:selected').html(),
-            duration: $('input[name="a_duration"]').val(),
-            count: $('input[name="a_count"]').val(),
-            price: $('input[name="a_price"]').val(),
-        },
-        success: function(res) {
-            console.log('add');
-        }
-    })
+    $('#confirm').unbind('click').removeAttr('onclick').click(function(){
+
+        $('#infomodal').attr('hidden', true);
+
+        $.ajax({
+            url: '/service/add',
+            data: {
+                name: $('input[name="a_name"]').val(),
+                content: $('#a_content').val(),
+                riskLevelId: $('#a_kind option:selected').val(),
+                kind: $('#a_kind option:selected').html(),
+                duration: $('input[name="a_duration"]').val(),
+                count: $('input[name="a_count"]').val(),
+                price: $('input[name="a_price"]').val(),
+            },
+            success: function(res) {
+                console.log('add');
+                $('#editmodal').attr('hidden', true);
+                table.reload('ser_table', {});
+            }
+        })
+
+    });
+
+    showModal('确认添加服务?');
 
 }
 
 var edit = function(){
 
-    var data = temp;
+    $('#confirm').unbind('click').removeAttr('onclick').click(function(){
 
-    var param = {
-        id: data.id
-    };
+        $('#infomodal').attr('hidden', true);
 
-    if ( $('input[name="a_name"]').val() != data.name ) {
-        param['name'] = $('input[name="a_name"]').val();
-    }
+        var data = temp;
 
-    if ( $('#a_content').val() != data.content ) {
-        param['content'] = $('#a_content').val();
-    }
+        var param = {
+            id: data.id
+        };
 
-    if ( $('#a_kind option:selected').html() != data.kind ) {
-        param['riskLevelId'] = $('#a_kind option:selected').val();
-        param['kind'] = $('#a_kind option:selected').html();
-    }
+        if ( $('input[name="a_name"]').val() != data.name ) {
+            param['name'] = $('input[name="a_name"]').val();
+        }
 
-    if ( $('input[name="a_duration"]').val() != data.duration ) {
-        param['duration'] = $('input[name="a_duration"]').val();
-    }
+        if ( $('#a_content').val() != data.content ) {
+            param['content'] = $('#a_content').val();
+        }
 
-    if ( $('input[name="a_count"]').val() != data.count ) {
-        param['count'] = $('input[name="a_count"]').val();
-    }
+        if ( $('#a_kind option:selected').html() != data.kind ) {
+            param['riskLevelId'] = $('#a_kind option:selected').val();
+            param['kind'] = $('#a_kind option:selected').html();
+        }
 
-    if ( $('input[name="a_price"]').val() != data.price ) {
-        param['price'] = $('input[name="a_price"]').val();
-    }
+        if ( $('input[name="a_duration"]').val() != data.duration ) {
+            param['duration'] = $('input[name="a_duration"]').val();
+        }
 
-    $.ajax({
-            url: '/service/edit',
-            data: param,
-            success: function(res) {
-                console.log('edit');
-                $('#editmodal').attr('hidden', true);
-                table.reload('ser_table', {});
-            }
-    })
+        if ( $('input[name="a_count"]').val() != data.count ) {
+            param['count'] = $('input[name="a_count"]').val();
+        }
+
+        if ( $('input[name="a_price"]').val() != data.price ) {
+            param['price'] = $('input[name="a_price"]').val();
+        }
+
+        $.ajax({
+                url: '/service/edit',
+                data: param,
+                success: function(res) {
+                    console.log('edit');
+                    $('#editmodal').attr('hidden', true);
+                    table.reload('ser_table', {});
+                }
+        })
+
+    });
+
+    showModal('确认修改服务?');
 
 }
 
@@ -180,6 +194,7 @@ var del = function(id){
             },
         success: function(res) {
             console.log('del');
+            $('#infomodal').attr('hidden', true);
             table.reload('ser_table', {});
         }
     })
@@ -200,4 +215,9 @@ var changeStatus = function(id, status){
             }
     })
 
+}
+
+function showModal(msg) {
+    $('#prompt').html(msg);
+    $('#infomodal').removeAttr('hidden');
 }

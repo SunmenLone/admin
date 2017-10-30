@@ -19,7 +19,7 @@ public class SendMsgService {
      * 发送短信
      * @return
      */
-    public String sendMsg(String phone,String randomNum){
+    public String sendMsg(String phone, String randomNum){
         try {
             String phoneNumber = phone;
             String jsonContent = "{\"number\":\"" + randomNum + "\"}";

@@ -16,7 +16,7 @@ public interface ServiceMapper {
     @SelectProvider(type = ServiceProvider.class, method = "selectService")
     List<ServiceEntity> findAll(ServiceEntity serviceEntity, Long first, Long limit);
 
-    @Insert("INSERT INTO SERVICE (NAME, PRICE, COUNT, DURATION, CONTENT, KIND, RISK_LEVEL_ID) VALUES (#{name}, #{price}, #{count}, #{duration}, #{content}, #{kind}, #{riskLevelId})")
+    @Insert("INSERT INTO SERVICE (NAME, PRICE, COUNT, DURATION, CONTENT, KIND, RISK_LEVEL_ID) VALUES (#{name}, #{price}, #{count}, #{duration}, #{content}, #{kind}, #{risk_level_id})")
     Integer addService(ServiceEntity serviceEntity);
 
     @UpdateProvider(type = ServiceProvider.class, method = "updateService")

@@ -8,6 +8,8 @@ public class UserProvider {
 
     public String updateUser (User user) {
 
+        StringBuffer sb = new StringBuffer();
+
         return new SQL(){
             {
                 UPDATE("USER");

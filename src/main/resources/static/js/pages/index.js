@@ -66,19 +66,20 @@ layui.use('element', function(){
 
         var logout = function() {
 
-            layer.confirm('确认退出帐号 ' + $('#username').html() + '?', function(index){
 
+            $('#cancel').css('display', 'inline-block');
+            $('#confirm').unbind('click').removeAttr('onclick').click(function(){
                 $.ajax({
                     url: '/signOut',
-                    data: {
-                    },
+                    data: {},
                     complete: function(){
                         window.location.href="../login.html";
                     }
                 })
-
-                layer.close(index);
             });
+
+            showModal('确认退出帐号 ' + $('#username').html() + '?');
+
         }
 
         var client = null;
@@ -86,7 +87,8 @@ layui.use('element', function(){
 
             if (avatar == null && !aliasChange && !passwordChange) return;
 
-            layer.confirm('确认修改用户信息?', function(index){
+            $('#cancel').css('display', 'inline-block');
+            $('#confirm').unbind('click').removeAttr('onclick').click(function() {
 
                 var param = {
                     username: $('#account').html()
@@ -136,10 +138,10 @@ layui.use('element', function(){
                     updateUser(param);
                 }
 
-
-
-                layer.close(index);
             });
+
+            showModal('确认修改用户信息?');
+
         }
 
         var updateUser = function(param) {
@@ -160,14 +162,16 @@ layui.use('element', function(){
                 data: param,
                 success: function(res) {
 
+                    $('#cancel').css('display', 'none');
+                    $('#confirm').unbind('click').removeAttr('onclick').click(function(){
+                        $('#infomodal').attr('hidden', true);
+                    })
+
                     if (res.code == 0) {
                         $('#username').html(alias);
-                        layer.open({
-                            title: '提示',
-                            content: '修改用户信息成功'
-                            });
+                        showModal('修改用户信息成功');
                     } else {
-
+                        showModal('操作失败，请稍后重试');
                     }
 
                     avatar = null;
@@ -179,3 +183,8 @@ layui.use('element', function(){
             })
 
         }
+
+function showModal(msg) {
+    $('#prompt').html(msg);
+    $('#infomodal').removeAttr('hidden');
+}

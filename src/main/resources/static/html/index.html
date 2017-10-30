@@ -113,11 +113,11 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        Copyright © 2017-2018 佳医比邻
     </div>
 </div>
 
-<div id="modal" class="mask" hidden="true">
+<div id="modal" class="mask" hidden>
     <div class="modal-content">
         <div class="modal-title">
             <div class="modal-title__text">修改帐号信息</div>
@@ -159,6 +159,22 @@
     </div>
 </div>
 
+<div id="infomodal" class="mask" hidden>
+    <div class="modal-content" style="width: 360px; height: 240px;">
+        <div class="modal-title">
+            <div class="modal-title__text">提示</div>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#infomodal').attr('hidden','true');">
+        </div>
+        <div style="text-align: center; margin-top: 64px;">
+            <img style="display: inline-block; width: 32px; height: 32px;" src="../imgs/prompt.png">
+            <div style="display: inline-block; line-height: 32px; margin-left: 5px;" id="prompt"></div>
+        </div>
+        <div style="text-align: center; margin-top: 48px;">
+            <button class="layui-btn" id="confirm">确认</button>
+            <button class="layui-btn layui-btn-primary" id="cancel" onclick="$('#infomodal').attr('hidden','true');">取消</button>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>

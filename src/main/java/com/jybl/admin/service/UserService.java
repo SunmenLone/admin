@@ -102,6 +102,7 @@ public class UserService {
                     user.setPassword(password);
                     userMapper.updateUser(user);
                     map.put("code", 0);
+                    map.put("msg", "重置登录密码成功");
                     return map;
                 } else {
                     //验证码不正确，校验失败

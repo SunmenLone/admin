@@ -35,7 +35,7 @@ public class ServiceProvider {
                 }
 
                 if (serviceEntity.getRisk_level_id() != null) {
-                    SET("risk_level_id = #{riskLevelId}");
+                    SET("risk_level_id = #{risk_level_id}");
                 }
 
                 if (serviceEntity.getKind() != null) {

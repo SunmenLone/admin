@@ -35,10 +35,7 @@ var submitLogin = function() {
                 }
                 window.location.href="/html/index.html";
             } else {
-                layer.open({
-                  title: '提示',
-                  content: res.msg
-                });
+                showModal(res.msg);
             }
         }
     })
@@ -92,4 +89,9 @@ function getCookieVal(offset) {
     var endstr = document.cookie.indexOf(";", offset);
     if (endstr == -1) endstr = document.cookie.length;
     return unescape(document.cookie.substring(offset, endstr));
+}
+
+function showModal(msg) {
+    $('#prompt').html(msg);
+    $('#modal').removeAttr('hidden');
 }

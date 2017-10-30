@@ -132,7 +132,7 @@ $(function(){
                     experience = true;
                 });
 
-                $('#primary').on('click', function(){
+                $('#primary').unbind('click').removeAttr('onclick').click(function(){
 
                     var param = {};
                     param['phone'] = doc.phone;
@@ -304,7 +304,7 @@ $(function(){
         });
     } else {
 
-        $('#primary').on('click', function() {
+        $('#primary').unbind('click').removeAttr('onclick').click(function() {
 
             if (client == null) {
                OSS.urllib.request("http://125.216.243.114:2004/requestSTS",{method: 'GET'},function (err, response) {
@@ -384,14 +384,14 @@ var add = function(){
 
              $('#info').html('添加医生成功!');
              $('#info_primary').html('继续添加');
-             $('#info_primary').click(function(){
+             $('#info_primary').unbind('click').removeAttr('onclick').click(function(){
                 $('#infomodal').attr('hidden', true);
                 $('#aform')[0].reset();
                 $('#head_pic').removeAttr('src');
                 $('#practice_pic').removeAttr('src');
              });
              $('#info_second').html('返回');
-             $('#info_second').click(function(){
+             $('#info_second').unbind('click').removeAttr('onclick').click(function(){
                 window.location.href="docman.html";
              });
              $('#infomodal').removeAttr('hidden');
@@ -421,11 +421,11 @@ var edit = function(param) {
 
             $('#info').html('保存修改成功!');
             $('#info_primary').html('留在此页');
-            $('#info_primary').click(function(){
+            $('#info_primary').unbind('click').removeAttr('onclick').click(function(){
                 $('#infomodal').attr('hidden', true);
             });
             $('#info_second').html('返回');
-            $('#info_second').click(function(){
+            $('#info_second').unbind('click').removeAttr('onclick').click(function(){
                 window.location.href="docman.html";
             });
             $('#infomodal').removeAttr('hidden');
@@ -437,7 +437,7 @@ var verify = function(phone) {
 
     $('#info').html('确认通过认证?');
     $('#info_primary').html('审核通过');
-    $('#info_primary').click(function(){
+    $('#info_primary').unbind('click').removeAttr('onclick').click(function(){
         $.ajax({
             url: '/doctor/verify',
             data: {
@@ -450,7 +450,7 @@ var verify = function(phone) {
         })
     });
     $('#info_second').html('取消');
-    $('#info_second').click(function(){
+    $('#info_second').unbind('click').removeAttr('onclick').click(function(){
         $('#infomodal').attr('hidden', true);
     });
     $('#infomodal').removeAttr('hidden');
@@ -461,7 +461,7 @@ var del = function(phone) {
 
     $('#info').html('确认删除医生?');
     $('#info_primary').html('确定');
-    $('#info_primary').click(function(){
+    $('#info_primary').unbind('click').removeAttr('onclick').click(function(){
         $.ajax({
             url: '/doctor/del',
             data: {
@@ -473,7 +473,7 @@ var del = function(phone) {
         })
     });
     $('#info_second').html('取消');
-    $('#info_second').click(function(){
+    $('#info_second').unbind('click').removeAttr('onclick').click(function(){
         $('#infomodal').attr('hidden', true);
     });
     $('#infomodal').removeAttr('hidden');

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title> 重置密码 - 佳医比邻后台管理系统</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/common.css">
 
     <style>
 
@@ -85,6 +86,23 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="modal" class="mask" hidden>
+    <div class="modal-content" style="width: 360px; height: 240px;">
+        <div class="modal-title">
+            <div class="modal-title__text">提示</div>
+            <img class="modal-title__img" src="../imgs/close.png" onclick="$('#modal').attr('hidden','true');"></img>
+        </div>
+        <div style="text-align: center; margin-top: 64px;">
+            <img style="display: inline-block; width: 32px; height: 32px;" src="../imgs/prompt.png">
+            <div style="display: inline-block; line-height: 32px; margin-left: 5px;" id="prompt"></div>
+        </div>
+        <div style="text-align: center; margin-top: 48px;">
+            <button class="layui-btn" id="confirm">确定</button>
+            <button class="layui-btn layui-btn-primary" id="cancel" onclick="$('#modal').attr('hidden','true');" style="display:none;">取消</button>
+        </div>
     </div>
 </div>
 

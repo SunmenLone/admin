@@ -37,6 +37,8 @@ var getSmsCode = function() {
                 setTime($('#get_code'));
                 hash = res.hash;
                 tamp = res.tamp;
+            } else {
+                showModal(res.msg);
             }
         }
     })
@@ -73,11 +75,28 @@ var resetPwd = function() {
             tamp: tamp
         },
         success: function(res){
-            if(res.code == 0) {
-
+            if (res.code == 0) {
+                $("#cancel").html('留在此页');
+                $("#cancel").css('display', 'inline-block');
+                $("#confirm").html('前往登录');
+                $("#confirm").unbind('click').removeAttr('onclick').click(function(){
+                    window.location.href="resetpwd.html";
+                })
+            } else {
+                $("#cancel").css('display', 'none');
+                $("#confirm").html('确定');
+                $("#confirm").unbind('click').removeAttr('onclick').click(function(){
+                    $('#modal').attr('hidden', true);
+                })
             }
+            showModal(res.msg);
         }
     })
 
 
+}
+
+function showModal(msg) {
+    $('#prompt').html(msg);
+    $('#modal').removeAttr('hidden');
 }

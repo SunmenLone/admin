@@ -1,9 +1,10 @@
 package com.jybl.admin.entity;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class OrderEntity {
+public class OrderEntity implements Serializable {
     private Long id;//订单id
     private String purchased_time;//购买时间
     private String indent_number;//订单编号

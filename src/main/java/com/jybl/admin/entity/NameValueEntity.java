@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class NameValueEntity {
+import java.io.Serializable;
+
+public class NameValueEntity implements Serializable {
 
     private String name;
     private Long value;

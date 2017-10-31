@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class PurchaseEntity {
+import java.io.Serializable;
+
+public class PurchaseEntity implements Serializable {
     private int id;//订单id
     private String purchased_time;//购买时间
     private String indent_number;//订单编号

@@ -1,5 +1,7 @@
 package com.jybl.admin.entity;
 
+import java.io.Serializable;
+
 /**
 
 create table doctor_service(
@@ -17,7 +19,7 @@ primary key (id)
 
  **/
 
-public class DoctorServiceEntity {
+public class DoctorServiceEntity implements Serializable {
     private Long id;
     private String doctor_phone;
     private Long service_id;

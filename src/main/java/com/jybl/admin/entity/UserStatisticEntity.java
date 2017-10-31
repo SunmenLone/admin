@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class UserStatisticEntity {
+import java.io.Serializable;
+
+public class UserStatisticEntity implements Serializable {
 
     private String month;
     private Long patient_count;

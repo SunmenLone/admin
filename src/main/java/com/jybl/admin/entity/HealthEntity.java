@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class HealthEntity {
+import java.io.Serializable;
+
+public class HealthEntity implements Serializable {
 
     private String wechat_id;//患者微信id
     private float height;//身高

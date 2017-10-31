@@ -14,10 +14,11 @@ public class DoctorService {
     DoctorMapper doctorMapper;
 
     public Integer getCount() {
-       return  doctorMapper.getCount();
+        return doctorMapper.getCount();
     }
 
     public List<DoctorEntity> findAll(DoctorEntity doctorEntity, Long first, Long limit) {
+
         List<DoctorEntity> list = doctorMapper.findAll(doctorEntity, first, limit);
         int i = 1;
         for (DoctorEntity de : list) {

@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class OrderStatisticEntity {
+import java.io.Serializable;
+
+public class OrderStatisticEntity implements Serializable {
 
     private String month;
     private Long count;

@@ -1,6 +1,8 @@
 package com.jybl.admin.entity;
 
-public class BloodPressureEntity {
+import java.io.Serializable;
+
+public class BloodPressureEntity implements Serializable {
     private String wechat_id;//患者微信号id
     private String date;//日期
     private String time;//时间

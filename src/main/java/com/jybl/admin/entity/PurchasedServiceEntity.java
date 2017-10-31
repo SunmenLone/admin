@@ -1,4 +1,7 @@
 package com.jybl.admin.entity;
+
+import java.io.Serializable;
+
 /**
 
  购买的服务包
@@ -26,7 +29,7 @@ package com.jybl.admin.entity;
 
  alter table purchased_service add  index index_wechat_id (wechat_id);
  */
-public class PurchasedServiceEntity {
+public class PurchasedServiceEntity implements Serializable {
     private int id;//订单id
     private String purchased_time;//购买时间
     private String indent_number;//订单编号

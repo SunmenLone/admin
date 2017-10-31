@@ -1,10 +1,11 @@
 package com.jybl.admin.entity;
 
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ServiceEntity {
+public class ServiceEntity implements Serializable {
 	private Long id;
 	private String name;//名称
 	private String price; //价格

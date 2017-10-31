@@ -1,5 +1,7 @@
 package com.jybl.admin.entity;
 
+import java.io.Serializable;
+
 /**
 
 
@@ -29,7 +31,7 @@ package com.jybl.admin.entity;
  */
 
 
-public class DoctorEntity {
+public class DoctorEntity implements Serializable{
 	private Long id;
 	private String name;//姓名
 	private String phone;//电话

@@ -4,6 +4,8 @@ import com.jybl.admin.entity.DoctorServiceEntity;
 import com.jybl.admin.entity.ServiceEntity;
 import com.jybl.admin.dao.provider.ServiceProvider;
 import org.apache.ibatis.annotations.*;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 

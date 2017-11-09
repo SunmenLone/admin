@@ -19,7 +19,7 @@
             },
             series: [
                 {
-                    name:'访问来源',
+                    name:'健康状况',
                     type:'pie',
                     radius: ['45%', '70%'],
                     avoidLabelOverlap: false,

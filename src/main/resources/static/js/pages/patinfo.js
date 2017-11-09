@@ -122,71 +122,87 @@
             $('#address').html(pe.address);
             $('#detailed_address').html(pe.detailed_address);
 
-            $('#prob').html(pe.prob.toFixed(1) + '%');
-            var prob = [];
-            prob.push({value:pe.prob, name:pe.prob.toFixed(1) + '%'});
-            prob.push({value:100-pe.prob});
-            optionRing.series[0].data = prob
-            ring.setOption(optionRing);
-
-            var he = res.healthInfo;
-            $('#height').html(he.height);
-            $('#weight').html(he.weight);
-            $('#bmi').html(Math.round(he.weight / ((he.height * 0.01) * (he.height * 0.01))));
-            $('#diabetes').html(he.diabetes);
-            $('#chd').html(he.chd);
-            $('#stroke').html(he.stroke);
-            $('#hypertension').html(he.hypertension);
-            $('#family_history').html(he.family_history);
-            $('#other_history').html(he.other_history);
-            $('#smoke').html(he.smoke);
-            $('#smoking').html(he.smoking);
-            $('#drink').html(he.drink);
-            $('#drinking').html(he.drinking);
-
-            bpe = res.bloodPressure;
-            var nc = 0;
-            var hc = 0;
-            var max_s = 0;
-            var max_d = 0;
-            var avg_s = 0;
-            var avg_d = 0;
-            var avg_r = 0;
-            var x = [];
-            var s = [];
-            var d = [];
-            for (var i = 0; i < bpe.length; i++) {
-                var bp = bpe[i];
-                if (bp.systolic_pressure > 140 || bp.diastolic_pressure > 90) {
-                    hc ++;
-                } else {
-                    nc ++;
-                }
-                if (parseFloat(bp.systolic_pressure) > max_s) {
-                    max_s = parseFloat(bp.systolic_pressure);
-                }
-                if (parseFloat(bp.diastolic_pressure) > max_d) {
-                    max_d = parseFloat(bp.diastolic_pressure)
-                }
-                avg_s += bp.systolic_pressure / bpe.length;
-                avg_d += bp.diastolic_pressure / bpe.length;
-                avg_r += bp.rhr / bpe.length;
-                x.push(bp.date);
-                s.push(bp.systolic_pressure);
-                d.push(bp.diastolic_pressure);
+            if (pe.prob != null) {
+                $('#prob').html(pe.prob.toFixed(1) + '%');
+                var prob = [];
+                prob.push({value:pe.prob, name:pe.prob.toFixed(1) + '%'});
+                prob.push({value:100-pe.prob});
+                optionRing.series[0].data = prob
+                ring.setOption(optionRing);
+            } else {
+                $('#evaluateResult').css('display', 'none');
+                $('#title3').html('风险评估结果（尚未评估）');
             }
 
-            $('#nc').html(nc);
-            $('#hc').html(hc);
-            $('#max_s').html(max_s);
-            $('#max_d').html(max_d);
-            $('#avg').html(Math.ceil(avg_s) + ' / ' + Math.ceil(avg_d));
-            $('#avg_r').html(Math.round(avg_r));
+            var he = res.healthInfo;
+            if (he != null) {
+                $('#height').html(he.height);
+                $('#weight').html(he.weight);
+                $('#bmi').html(Math.round(he.weight / ((he.height * 0.01) * (he.height * 0.01))));
+                $('#diabetes').html(he.diabetes);
+                $('#chd').html(he.chd);
+                $('#stroke').html(he.stroke);
+                $('#hypertension').html(he.hypertension);
+                $('#family_history').html(he.family_history);
+                $('#other_history').html(he.other_history);
+                $('#smoke').html(he.smoke);
+                $('#smoking').html(he.smoking);
+                $('#drink').html(he.drink);
+                $('#drinking').html(he.drinking);
+            } else {
+                $('#healthInfo').css('display', 'none');
+                $('#title1').html('健康信息（尚未填写）');
+            }
 
-            optionLine.xAxis.data = x;
-            optionLine.series[0].data = s;
-            optionLine.series[1].data = d;
-            line.setOption(optionLine);
+
+            bpe = res.bloodPressure;
+            if (bpe.length > 0) {
+                var nc = 0;
+                var hc = 0;
+                var max_s = 0;
+                var max_d = 0;
+                var avg_s = 0;
+                var avg_d = 0;
+                var avg_r = 0;
+                var x = [];
+                var s = [];
+                var d = [];
+                for (var i = 0; i < bpe.length; i++) {
+                    var bp = bpe[i];
+                    if (bp.systolic_pressure > 140 || bp.diastolic_pressure > 90) {
+                        hc ++;
+                    } else {
+                        nc ++;
+                    }
+                    if (parseFloat(bp.systolic_pressure) > max_s) {
+                        max_s = parseFloat(bp.systolic_pressure);
+                    }
+                    if (parseFloat(bp.diastolic_pressure) > max_d) {
+                        max_d = parseFloat(bp.diastolic_pressure)
+                    }
+                    avg_s += bp.systolic_pressure / bpe.length;
+                    avg_d += bp.diastolic_pressure / bpe.length;
+                    avg_r += bp.rhr / bpe.length;
+                    x.push(bp.date);
+                    s.push(bp.systolic_pressure);
+                    d.push(bp.diastolic_pressure);
+                }
+
+                $('#nc').html(nc);
+                $('#hc').html(hc);
+                $('#max_s').html(max_s);
+                $('#max_d').html(max_d);
+                $('#avg').html(Math.ceil(avg_s) + ' / ' + Math.ceil(avg_d));
+                $('#avg_r').html(Math.round(avg_r));
+
+                optionLine.xAxis.data = x;
+                optionLine.series[0].data = s;
+                optionLine.series[1].data = d;
+                line.setOption(optionLine);
+            } else {
+                $('#testData').css('display', 'none');
+                $('#title2').html('测量数据（没有数据）');
+            }
         }
     })
 

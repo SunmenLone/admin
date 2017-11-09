@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor Management</title>
+    <title>Patient Information</title>
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/common.css">
 
@@ -101,97 +101,101 @@
                             <label id="detailed_address" class="layui-form-label label-content"></label>
                         </div>
                     </div>
-                    <p class="layui-elem-quote">健康信息</p>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">身高(cm)：</label>
-                            <label id="height" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">体重(kg)：</label>
-                            <label id="weight" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">BMI(kg/m2)：</label>
-                            <label id="bmi" class="layui-form-label label-content2"></label>
-                        </div>
-                    </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">糖尿病：</label>
-                            <label id="diabetes" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">冠心病：</label>
-                            <label id="chd" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">脑卒中：</label>
-                            <label id="stroke" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">高血压：</label>
-                            <label id="hypertension" class="layui-form-label label-content2"></label>
-                        </div>
-                    </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">家族病史：</label>
-                            <label id="family_history" class="layui-form-label label-content2" style="width: 285px;"></label>
-                            <label class="layui-form-label">其他病史：</label>
-                            <label id="other_history" class="layui-form-label label-content2" style="width: 285px;"></label>
-                        </div>
-                    </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">吸烟：</label>
-                            <label id="smoke" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">吸烟量：</label>
-                            <label id="smoking" class="layui-form-label label-content2"></label>
-                            <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">支/天</div>
-                            <label class="layui-form-label" style="margin-left: 160px;">饮酒：</label>
-                            <label id="drink" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label">饮酒量：</label>
-                            <label id="drinking" class="layui-form-label label-content2"></label>
-                            <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">ml/天</div>
-                        </div>
-                    </div>
-                    <p class="layui-elem-quote">测量数据</p>
-                    <div style="display:flex; display: -webkit-flex;">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">记录范围：</label>
-                            <div class="layui-input-block">
-                                <input lay-filter="duration" type="radio" name="duration" value="0" title="全部" checked>
-                                <input lay-filter="duration" type="radio" name="duration" value="7" title="最近一周">
-                                <input lay-filter="duration" type="radio" name="duration" value="30" title="最近一个月">
+                    <p class="layui-elem-quote" id="title1">健康信息</p>
+                    <div id="healthInfo">
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身高(cm)：</label>
+                                <label id="height" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">体重(kg)：</label>
+                                <label id="weight" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">BMI(kg/m2)：</label>
+                                <label id="bmi" class="layui-form-label label-content2"></label>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">测量时间：</label>
-                            <div class="layui-input-block">
-                                <input lay-filter="period" type="radio" name="period" value="all" title="全部" checked>
-                                <input lay-filter="period" type="radio" name="period" value="morning" title="晨起">
-                                <input lay-filter="period" type="radio" name="period" value="evening" title="睡前">
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">糖尿病：</label>
+                                <label id="diabetes" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">冠心病：</label>
+                                <label id="chd" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">脑卒中：</label>
+                                <label id="stroke" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">高血压：</label>
+                                <label id="hypertension" class="layui-form-label label-content2"></label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">家族病史：</label>
+                                <label id="family_history" class="layui-form-label label-content2" style="width: 285px;"></label>
+                                <label class="layui-form-label">其他病史：</label>
+                                <label id="other_history" class="layui-form-label label-content2" style="width: 285px;"></label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">吸烟：</label>
+                                <label id="smoke" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">吸烟量：</label>
+                                <label id="smoking" class="layui-form-label label-content2"></label>
+                                <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">支/天</div>
+                                <label class="layui-form-label" style="margin-left: 160px;">饮酒：</label>
+                                <label id="drink" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label">饮酒量：</label>
+                                <label id="drinking" class="layui-form-label label-content2"></label>
+                                <div class="layui-form-mid layui-word-aux" style="color:#666 !important;">ml/天</div>
                             </div>
                         </div>
                     </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label label-fw">正常血压结果(次)：</label>
-                            <label id="nc" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label label-fw">偏高血压结果(次)：</label>
-                            <label id="hc" class="layui-form-label label-content2"></label>
+                    <p class="layui-elem-quote" id="title2">测量数据</p>
+                    <div id="testData">
+                        <div style="display:flex; display: -webkit-flex;">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">记录范围：</label>
+                                <div class="layui-input-block">
+                                    <input lay-filter="duration" type="radio" name="duration" value="0" title="全部" checked>
+                                    <input lay-filter="duration" type="radio" name="duration" value="7" title="最近一周">
+                                    <input lay-filter="duration" type="radio" name="duration" value="30" title="最近一个月">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">测量时间：</label>
+                                <div class="layui-input-block">
+                                    <input lay-filter="period" type="radio" name="period" value="all" title="全部" checked>
+                                    <input lay-filter="period" type="radio" name="period" value="morning" title="晨起">
+                                    <input lay-filter="period" type="radio" name="period" value="evening" title="睡前">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label label-fw">高压最高值(mmHg)：</label>
-                            <label id="max_s" class="layui-form-label label-content2"></label>
-                            <label class="layui-form-label label-fw">低压最高值(mmHg)：</label>
-                            <label id="max_d" class="layui-form-label label-content2"></label>
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label label-fw">正常血压结果(次)：</label>
+                                <label id="nc" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label label-fw">偏高血压结果(次)：</label>
+                                <label id="hc" class="layui-form-label label-content2"></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item filter-area-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label label-fw">血压平均值(mmHg)：</label>
-                            <label id="avg" class="layui-form-label label-content"></label>
-                            <label class="layui-form-label label-fw">心率平均值(bpm)：</label>
-                            <label id="avg_r" class="layui-form-label label-content2"></label>
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label label-fw">高压最高值(mmHg)：</label>
+                                <label id="max_s" class="layui-form-label label-content2"></label>
+                                <label class="layui-form-label label-fw">低压最高值(mmHg)：</label>
+                                <label id="max_d" class="layui-form-label label-content2"></label>
+                            </div>
                         </div>
+                        <div class="layui-form-item filter-area-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label label-fw">血压平均值(mmHg)：</label>
+                                <label id="avg" class="layui-form-label label-content"></label>
+                                <label class="layui-form-label label-fw">心率平均值(bpm)：</label>
+                                <label id="avg_r" class="layui-form-label label-content2"></label>
+                            </div>
+                        </div>
+                        <div id="line" class="line"></div>
                     </div>
-                    <div id="line" class="line"></div>
-                    <p class="layui-elem-quote">风险评估结果</p>
-                    <div style="display: flex;">
+                    <p class="layui-elem-quote" id="title3">风险评估结果</p>
+                    <div style="display: flex;" id="evaluateResult">
                         <div style="color: #333; line-height: 200px;">未来10年患心血管疾病的概率为<span id="prob"></span></div>
                         <div id="ring" class="ring"></div>
                     </div>

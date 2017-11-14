@@ -30,6 +30,8 @@ public class DoctorServiceEntity implements Serializable {
     private String added_time;
     private int added_status;
 
+    private int status;
+
     private String kind;
     private Integer purchased_count = 0;
 
@@ -133,5 +135,13 @@ public class DoctorServiceEntity implements Serializable {
 
     public void setRid(Long rid) {
         this.rid = rid;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

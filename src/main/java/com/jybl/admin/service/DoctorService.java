@@ -2,6 +2,7 @@ package com.jybl.admin.service;
 
 import com.jybl.admin.dao.DoctorMapper;
 import com.jybl.admin.entity.DoctorEntity;
+import com.jybl.admin.entity.DoctorServiceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,9 @@ public class DoctorService {
     }
 
     public Integer verifyDoctor(String phone, String verify){
-        return doctorMapper.verifyDoctor(phone, verify);
+        doctorMapper.verifyDoctor(phone, verify);
+        doctorMapper.sendMsg(phone, "审核状态", "您的个人资料已通过认证");
+        return 0;
     };
 
     public Integer deleteDoctor(String phone) {
@@ -54,6 +57,13 @@ public class DoctorService {
 
     public Integer sendRemind(String phone, String title, String content) {
         return doctorMapper.sendMsg(phone, title, content);
+    }
+
+    public Integer sendServiceDeleteMsg(Long serviceId) {
+        for(DoctorServiceEntity ds : doctorMapper.getDoctorServiceByServiceId(serviceId)) {
+            doctorMapper.sendMsg(ds.getDoctor_phone(), "服务状态", "您的添加的服务\"" + ds.getService_name() + "\"已被管理员删除");
+        }
+        return 0;
     }
 
 

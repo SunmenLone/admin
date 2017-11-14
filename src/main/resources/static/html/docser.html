@@ -21,10 +21,12 @@
     <table id="docser_table" lay-filter="docser"></table>
 
     <script type="text/html" id="opt">
-        {{#  if(d.added_status == 0){ }}
+        {{#  if(d.added_status == 0 && d.status == 1){ }}
         <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="enable">上架</a>
-        {{#  } else { }}
+        {{#  } else if(d.added_status == 1 && d.status == 1) { }}
         <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="disable">下架</a>
+        {{#  } else { }}
+        <a class="layui-btn layui-btn-primary layui-btn-mini" disabled>已冻结</a>
         {{#  } }}
     </script>
 

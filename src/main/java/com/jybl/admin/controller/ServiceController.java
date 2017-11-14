@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jybl.admin.entity.DoctorServiceEntity;
 import com.jybl.admin.entity.ServiceEntity;
+import com.jybl.admin.service.DoctorService;
 import com.jybl.admin.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class ServiceController {
 
     @Autowired
     ServiceService serviceService;
+
+    @Autowired
+    DoctorService doctorService;
 
     @RequestMapping("/listAll")
     public Map findAllService(HttpServletRequest request) {
@@ -150,6 +154,8 @@ public class ServiceController {
 
             serviceService.deleteService(id);
 
+            doctorService.sendServiceDeleteMsg(id);
+
             map.put("code", 0);
 
         } catch (Exception e) {
@@ -233,7 +239,7 @@ public class ServiceController {
                 time = sdf.format(new Date());
             }
 
-            serviceService.updateDocServiceStatus(id, status, time);
+            serviceService.updateDocServiceStatusWithId(id, status, time);
 
             map.put("code", 0);
 

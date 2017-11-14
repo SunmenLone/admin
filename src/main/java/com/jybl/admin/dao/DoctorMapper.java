@@ -2,6 +2,7 @@ package com.jybl.admin.dao;
 
 import com.jybl.admin.dao.provider.DoctorProvider;
 import com.jybl.admin.entity.DoctorEntity;
+import com.jybl.admin.entity.DoctorServiceEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -32,5 +33,8 @@ public interface DoctorMapper {
 
     @Insert("INSERT INTO REMINDERS (PHONE, TITLE, CONTENT) VALUES (#{phone}, #{title}, #{content})")
     Integer sendMsg(@Param("phone") String phone, @Param("title") String title, @Param("content") String content);
+
+    @Select("SELECT * FROM DOCTOR_SERVICE WHERE SERVICE_ID = #{service_id}")
+    List<DoctorServiceEntity> getDoctorServiceByServiceId(@Param("service_id") Long service_id);
 
 }

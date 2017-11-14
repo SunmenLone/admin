@@ -8,7 +8,7 @@ public class ServiceProvider {
     public String selectService(ServiceEntity serviceEntity, Long first, Long limit) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM SERVICE WHERE 1=1");
+        sb.append("SELECT * FROM SERVICE WHERE DELETE_STATUS = 0");
         if (serviceEntity.getStatus() != null && serviceEntity.getStatus().length() > 0) {
             sb.append(" AND STATUS=" + serviceEntity.getStatus());
         }

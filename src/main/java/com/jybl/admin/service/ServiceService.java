@@ -14,7 +14,6 @@ public class ServiceService {
     @Autowired
     ServiceMapper serviceMapper;
 
-
     public Integer getCount(){
         return serviceMapper.getCount();
     }
@@ -48,12 +47,20 @@ public class ServiceService {
 
 
     public Integer updateServiceStatus(Long id, Integer status) {
-        return serviceMapper.updateServiceStatus(id, status);
+
+        serviceMapper.updateServiceStatus(id, status);
+
+        if (status == 0) {
+            serviceMapper.updateDocServiceStatusByServiceId(id, status);
+        }
+        return 0;
     }
 
 
     public Integer deleteService(Long id) {
-        return serviceMapper.deleteService(id);
+        serviceMapper.deleteService(id);
+        serviceMapper.deleteDoctorService(id);
+        return 0;
     }
 
 
@@ -78,10 +85,9 @@ public class ServiceService {
     }
 
 
-    public Integer updateDocServiceStatus(Long id, Integer status, String time) {
-        return serviceMapper.updateDocServiceStatus(id, status, time);
+    public Integer updateDocServiceStatusWithId(Long id, Integer status, String time) {
+        return serviceMapper.updateDocServiceStatusById(id, status, time);
     }
-
 
     public List<ServiceEntity> findAllAvailable(String phone, Long first, Long limit) {
         List<ServiceEntity> list = serviceMapper.findAllAvailable(phone, first, limit);

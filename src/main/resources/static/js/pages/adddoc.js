@@ -80,8 +80,8 @@ $(function(){
         $('#cur_cite').html('编辑医生');
         $('#primary').html('保存修改');
         $('#second').css('display', 'none');
-        $('#delete').css('display', 'inline-block');
-        $('#delete').attr('href', 'javascript:del(getUrlParam("phone"));');
+        //$('#delete').css('display', 'inline-block');
+        //$('#delete').attr('href', 'javascript:del(getUrlParam("phone"));');
 
         $.ajax({
             url:"/doctor/info",

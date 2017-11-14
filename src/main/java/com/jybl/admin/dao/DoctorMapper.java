@@ -30,4 +30,7 @@ public interface DoctorMapper {
     @Delete("DELETE FROM DOCTOR_INFO WHERE PHONE = #{phone}")
     Integer deleteDoctor(@Param("phone") String phone);
 
+    @Insert("INSERT INTO REMINDERS (PHONE, TITLE, CONTENT) VALUES (#{phone}, #{title}, #{content})")
+    Integer sendMsg(@Param("phone") String phone, @Param("title") String title, @Param("content") String content);
+
 }

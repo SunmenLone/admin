@@ -204,6 +204,7 @@ public class DoctorController {
     public Map verifyDoctor (HttpServletRequest request) {
 
         doctorService.verifyDoctor(request.getParameter("phone"), "已认证");
+        doctorService.sendRemind(request.getParameter("phone"), "审核状态", "您的个人资料已通过认证");
 
         Map map = new HashMap();
         map.put("code", 0);

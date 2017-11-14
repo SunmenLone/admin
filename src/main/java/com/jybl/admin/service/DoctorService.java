@@ -52,5 +52,9 @@ public class DoctorService {
         return doctorMapper.deleteDoctor(phone);
     };
 
+    public Integer sendRemind(String phone, String title, String content) {
+        return doctorMapper.sendMsg(phone, title, content);
+    }
+
 
 }

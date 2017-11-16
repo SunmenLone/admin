@@ -22,11 +22,11 @@ public class SendMsgService {
     public String sendMsg(String phone, String randomNum){
         try {
             String phoneNumber = phone;
-            String jsonContent = "{\"number\":\"" + randomNum + "\"}";
+            String jsonContent = "{\"code\":\"" + randomNum + "\"}";
             Map<String, String> paramMap = new HashMap<>();
             paramMap.put("phoneNumber", phoneNumber);
             paramMap.put("msgSign", "佳医比邻");
-            paramMap.put("templateCode", "SMS_86600062");
+            paramMap.put("templateCode", "SMS_110845006");
             paramMap.put("jsonContent", jsonContent);
             SendSmsResponse sendSmsResponse = AliyunMessageUtil.sendSms(paramMap);
 

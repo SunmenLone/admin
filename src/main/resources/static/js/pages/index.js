@@ -116,11 +116,11 @@ layui.use('element', function(){
                                     accessKeySecret: result.AccessKeySecret,
                                     stsToken: result.SecurityToken,
                                     endpoint: 'oss-cn-shenzhen.aliyuncs.com',
-                                    bucket: 'sunmen-oss'
+                                    bucket: 'jybl-photo'
                                 });
                                 var time = new Date().getTime();
                                 var ext = /\.[^\.]+/.exec(avatar.name);
-                                var fileName = 'doctor/head/' + time + ext;
+                                var fileName = 'sysuser/head/' + time + ext;
                                 client.multipartUpload(fileName, avatar).then(function (result) {
                                     avatar = result.res.requestUrls[0].split('?')[0];
                                     param['avatar'] = avatar;
@@ -169,6 +169,7 @@ layui.use('element', function(){
 
                     if (res.code == 0) {
                         $('#username').html(alias);
+                        $('#useravatar').attr('src', avatar);
                         showModal('修改用户信息成功');
                     } else {
                         showModal('操作失败，请稍后重试');

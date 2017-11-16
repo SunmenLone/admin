@@ -159,7 +159,7 @@ $(function(){
                                                 accessKeySecret: result.AccessKeySecret,
                                                 stsToken: result.SecurityToken,
                                                 endpoint: 'oss-cn-shenzhen.aliyuncs.com',
-                                                bucket: 'sunmen-oss'
+                                                bucket: 'jybl-photo'
                                             });
                                             var time = new Date().getTime();
                                             var ext = /\.[^\.]+/.exec(head_pic.name);
@@ -230,7 +230,7 @@ $(function(){
                                                                 accessKeySecret: result.AccessKeySecret,
                                                                 stsToken: result.SecurityToken,
                                                                 endpoint: 'oss-cn-shenzhen.aliyuncs.com',
-                                                                bucket: 'sunmen-oss'
+                                                                bucket: 'jybl-photo'
                                                             });
                                                             var time = new Date().getTime();
                                                             var ext = /\.[^\.]+/.exec(head_pic.name);
@@ -273,7 +273,7 @@ $(function(){
                                                                 accessKeySecret: result.AccessKeySecret,
                                                                 stsToken: result.SecurityToken,
                                                                 endpoint: 'oss-cn-shenzhen.aliyuncs.com',
-                                                                bucket: 'sunmen-oss'
+                                                                bucket: 'jybl-photo'
                                                             });
                                                             var time = new Date().getTime();
                                                             var ext = /\.[^\.]+/.exec(practice_pic.name);
@@ -316,7 +316,7 @@ $(function(){
                         accessKeySecret: result.AccessKeySecret,
                         stsToken: result.SecurityToken,
                         endpoint: 'oss-cn-shenzhen.aliyuncs.com',
-                        bucket: 'sunmen-oss'
+                        bucket: 'jybl-photo'
                     });
                     var time = new Date().getTime();
                     var ext = /\.[^\.]+/.exec(head_pic.name);

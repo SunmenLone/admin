@@ -15,8 +15,8 @@ public class PatientService {
     @Autowired
     PatientMapper patientMapper;
 
-    public Integer getCount() {
-        return patientMapper.getCount();
+    public Integer getCount(PatientEntity patientEntity) {
+        return patientMapper.getCount(patientEntity);
     }
 
 

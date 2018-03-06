@@ -52,7 +52,7 @@ public class ServiceController {
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", serviceService.getCount());
+        map.put("count", serviceService.getCount(se));
         map.put("data", list);
         return map;
     }

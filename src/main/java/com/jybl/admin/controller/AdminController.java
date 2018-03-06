@@ -31,12 +31,12 @@ public class AdminController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Integer rememberMe = Integer.valueOf(request.getParameter("rememberMe"));
+        //Integer rememberMe = Integer.valueOf(request.getParameter("rememberMe"));
 
         Map map = new HashMap();
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        token.setRememberMe( rememberMe == 1 );
+        //token.setRememberMe( rememberMe == 1 );
         Subject currentUser = SecurityUtils.getSubject();
 
         try {

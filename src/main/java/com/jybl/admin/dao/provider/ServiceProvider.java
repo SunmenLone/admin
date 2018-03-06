@@ -5,6 +5,21 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class ServiceProvider {
 
+    public String selectServiceCount(ServiceEntity serviceEntity) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT COUNT(*) FROM SERVICE WHERE DELETE_STATUS = 0");
+        if (serviceEntity.getStatus() != null && serviceEntity.getStatus().length() > 0) {
+            sb.append(" AND STATUS=" + serviceEntity.getStatus());
+        }
+        if (serviceEntity.getName() != null && serviceEntity.getName().length() > 0) {
+            sb.append(" AND NAME LIKE '%" + serviceEntity.getName() + "%'");
+        }
+
+        return sb.toString();
+
+    }
+
     public String selectService(ServiceEntity serviceEntity, Long first, Long limit) {
 
         StringBuffer sb = new StringBuffer();

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suggestion Management</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+<body>
+<div class="body-main">
+    <div class="sub-title">
+        <span class="layui-breadcrumb">
+            <a><cite style="color:#009688;">反馈结果</cite></a>
+        </span>
+    </div>
+    <table class="layui-table" lay-data="{even:true, url:'../suggestion/listAll', page:true, id:'sgt_table'}" lay-filter="sgt">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id', width:90}">序号</th>
+            <th lay-data="{field:'datetime', width:180}">提交时间</th>
+            <th lay-data="{field:'name', width:120}">姓名</th>
+            <th lay-data="{field:'phone', width:160}">联系电话</th>
+            <th lay-data="{field:'content', width:400}">反馈内容</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../js/tools.js"></script>
+<script src="../js/pages/sgtman.js"></script>
+</body>
+</html>

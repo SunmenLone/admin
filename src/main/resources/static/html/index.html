@@ -17,7 +17,6 @@
             height:99%;
             border:0;
             background-color: #fff;
-            bottom:
         }
 
         .layui-upload-img {
@@ -50,6 +49,30 @@
             background-color:#55d9d9;
         }
 
+        .menu-container {
+            display: flex;
+            display: -webkit-flex;
+            align-items:center;
+            height: 60px !important;
+            line-height: 60px !important;
+        }
+
+        .menu-i {
+            height: 20px;
+            width: 20px;
+            margin-left: 20px;
+        }
+
+        .menu-a {
+            color:#fff;
+            display: inline-block !important;
+            padding: 0 10px !important;
+            background-color: transparent !important;
+            height: 20px !important;
+            line-height: 20px !important;
+            font-size: 15px;
+        }
+
     </style>
 
 </head>
@@ -57,21 +80,9 @@
 <body class="layui-layout-body" style="background-color:#27b0b0;">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" style="background-color:#fff;">
-        <div class="layui-logo">佳医比邻</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <!--<li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>-->
-        </ul>
+        <div class="layui-logo" style="display: flex; display: -webkit-flex; justify-content: center; align-items: center;">
+            <img src="../imgs/logo2.png" style="height: 30px;">
+        </div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a style="color:#333;" href="javascript:;">
@@ -82,7 +93,7 @@
                     <dd id="dd"><a href="javascript: $('#modal').removeAttr('hidden'); $('#dd').removeClass('layui-this');">帐号信息</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a style="color:#333;" href="javascript: logout();">退出登录</a></li>
+            <li class="layui-nav-item"><div style="display:flex; display:-webkit-flex; align-items: center;"><img style="margin-left:20px; height: 16px; width: 16px;" src="../imgs/logout.png"><a style="color:#333; padding:0 10px !important;" href="javascript: logout();">退出</a></div></li>
         </ul>
     </div>
 
@@ -90,18 +101,12 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul id="left_nav" class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'home.html');">首页</a></li>
-                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'docman.html');">医生管理</a></li>
-                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'serman.html');">服务管理</a></li>
-                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'patman.html');">居民管理</a></li>
-                <li class="layui-nav-item"><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'odrman.html');">订单管理</a></li>
-                <!--<li class="layui-nav-item">-->
-                    <!--<a style="color:#fff;">发布管理</a>-->
-                    <!--<dl class="layui-nav-child">-->
-                        <!--<dd><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'pubman.html');">资讯管理</a></dd>-->
-                        <!--<dd><a style="color:#fff;" href="javascript:$('#ifm').attr('src', 'addpub.html');">发布资讯</a></dd>-->
-                    <!--</dl>-->
-                <!--</li>-->
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './home.html');"><img class="menu-i" src="../imgs/home.png"><a class="menu-a">首页</a></div></li>
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './serman.html');"><img class="menu-i" src="../imgs/service.png"><a class="menu-a">服务管理</a></div></li>
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './docman.html');"><img class="menu-i" src="../imgs/doctor.png"><a class="menu-a">医生管理</a></div></li>
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './patman.html');"><img class="menu-i" src="../imgs/patient.png"><a class="menu-a">居民管理</a></div></li>
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './odrman.html');"><img class="menu-i" src="../imgs/order.png"><a class="menu-a">订单管理</a></div></li>
+                <li class="layui-nav-item"><div class="menu-container" onclick="javascript:$('#ifm').attr('src', './sgtman.html');"><img class="menu-i" src="../imgs/suggestion.png"><a class="menu-a">反馈结果</a></div></li>
             </ul>
         </div>
     </div>
@@ -137,7 +142,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">登录密码：</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="password" required lay-verify="required" placeholder="请输入登录密码" autocomplete="off" class="layui-input">
+                    <input type="text" name="password" required lay-verify="required" placeholder="请输入新的登录密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -180,6 +185,7 @@
 <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/pages/index.js"></script>
+<script src="../js/md5.min.js"></script>
 
 </body>
 

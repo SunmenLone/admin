@@ -14,8 +14,8 @@ public class ServiceService {
     @Autowired
     ServiceMapper serviceMapper;
 
-    public Integer getCount(){
-        return serviceMapper.getCount();
+    public Integer getCount(ServiceEntity serviceEntity){
+        return serviceMapper.getCount(serviceEntity);
     }
 
 

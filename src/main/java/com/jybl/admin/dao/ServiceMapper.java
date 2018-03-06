@@ -4,16 +4,14 @@ import com.jybl.admin.entity.DoctorServiceEntity;
 import com.jybl.admin.entity.ServiceEntity;
 import com.jybl.admin.dao.provider.ServiceProvider;
 import org.apache.ibatis.annotations.*;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
 @Mapper
 public interface ServiceMapper {
 
-    @Select("SELECT COUNT(*) FROM SERVICE WHERE DELETE_STATUS = 0")
-    Integer getCount();
+    @SelectProvider(type = ServiceProvider.class, method = "selectServiceCount")
+    Integer getCount(ServiceEntity serviceEntity);
 
     @SelectProvider(type = ServiceProvider.class, method = "selectService")
     List<ServiceEntity> findAll(ServiceEntity serviceEntity, Long first, Long limit);

@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper
 public interface DoctorMapper {
 
-    @Select("SELECT COUNT(*) FROM DOCTOR_INFO")
-    Integer getCount();
+    @SelectProvider(type = DoctorProvider.class, method = "selectDoctorCount")
+    Integer getCount(DoctorEntity doctorEntity);
 
     @SelectProvider(type = DoctorProvider.class, method = "selectDoctor")
     List<DoctorEntity> findAll(DoctorEntity doctorEntity, Long first, Long limit);

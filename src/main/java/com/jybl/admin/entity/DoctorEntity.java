@@ -49,10 +49,11 @@ public class DoctorEntity implements Serializable{
 	private String verify;//认证
 	private String datetime;
 	private Integer count = 0;
+	private Long price = 0L;
 
 	public DoctorEntity(Long id, String name, String phone, String password, String sex, String practice_code,
                         String hospital, String department, String title, String practice_pic, String adept, String experience,
-                        String qRcode_pic, String head_pic, String verify, String datetime, Integer count) {
+                        String qRcode_pic, String head_pic, String verify, String datetime, Integer count, Long price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -71,6 +72,7 @@ public class DoctorEntity implements Serializable{
 		this.verify = verify;
 		this.datetime = datetime;
 		this.count = count;
+		this.price = price;
 	}
 	
 	
@@ -185,5 +187,13 @@ public class DoctorEntity implements Serializable{
 
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
 	}
 }

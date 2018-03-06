@@ -197,7 +197,7 @@
     $(function(){
 
         $.ajax({
-            url:'/statistic/listAll',
+            url:'../statistic/listAll',
             success: function(res) {
 
                 var uov = res.userOverview;

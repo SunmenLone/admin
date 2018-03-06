@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="layui-inline"><a class="layui-btn layui-btn-small" href="javascript: search();">查询</a></div>
-                    <div class="layui-inline"><a class="layui-btn layui-btn-small" href="adddoc.html">新增医生</a></div>
+                    <div class="layui-inline"><a class="layui-btn layui-btn-small" href="./adddoc.html">新增医生</a></div>
                 </div>
             </form>
         </div>
@@ -84,6 +84,16 @@
     <script type="text/html" id="opt">
         <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="order">订单</a>
         <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="edit">编辑</a>
+    </script>
+
+    <script type="text/html" id="status">
+        {{# if (d.verify == '未认证') { }}
+        <div style="color: #333333;">未认证</div>
+        {{# } else if (d.verify == '认证中') { }}
+        <a style="color: #ff6d01;" lay-event="verify">认证中</a>
+        {{# } else if (d.verify == '已认证') { }}
+        <div style="color: #09a97a;">已认证</div>
+        {{# } }}
     </script>
 
     <script type="text/html" id="ser">

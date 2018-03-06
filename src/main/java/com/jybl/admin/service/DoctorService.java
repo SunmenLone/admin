@@ -14,8 +14,8 @@ public class DoctorService {
     @Autowired
     DoctorMapper doctorMapper;
 
-    public Integer getCount() {
-        return doctorMapper.getCount();
+    public Integer getCount(DoctorEntity doctorEntity) {
+        return doctorMapper.getCount(doctorEntity);
     }
 
     public List<DoctorEntity> findAll(DoctorEntity doctorEntity, Long first, Long limit) {

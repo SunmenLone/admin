@@ -9,31 +9,27 @@ var submitLogin = function() {
     var username = $('input[name="username"]').val();
     var password = $('input[name="password"]').val();
 
-    SetCookie('username', username);
-
     var param = {
         username: username,
-        password: password
+        password: md5(username + md5('jiayibilin' + password))
     }
-
-    if ( $('input[name="remember"]').is(':checked') ) {
-        param['rememberMe'] = 1;
-    } else {
-        param['rememberMe'] = 0;
-    }
-
 
     $.ajax({
-        url: '/submitLogin',
+        url: './submitLogin',
         data: param,
         success: function(res){
             if (res.code == 0) {
-                if ($('input[name="remember"]').is(':checked')) {
+                if ( $('input[name="reacc"]').is(':checked') ) {
+                    SetCookie('username', username);
+                } else {
+                    SetCookie('username', '');
+                }
+                if ($('input[name="repwd"]').is(':checked')) {
                     SetCookie('password', password);
                 } else {
                     SetCookie('password', '');
                 }
-                window.location.href="/html/index.html";
+                window.location.href="./html/index.html";
             } else {
                 showModal(res.msg);
             }
@@ -42,7 +38,6 @@ var submitLogin = function() {
 }
 
 $(function(){
-     console.log(document.cookie);
 
      var username = GetCookie('username');
      var password = GetCookie('password');

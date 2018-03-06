@@ -37,7 +37,7 @@ layui.use('element', function(){
     $(function(){
 
             $.ajax({
-                url: '/user/info',
+                url: '../user/info',
                 data: {
                 },
                 success: function(res){
@@ -46,7 +46,7 @@ layui.use('element', function(){
                     $('#username').html(res.user.alias);
                     $('#account').html(res.user.username);
                     $('input[name="alias"]').val(res.user.alias);
-                    $('input[name="password"]').val(res.user.password);
+                    $('input[name="password"]').val(GetCookie("password"));
                     $('#avatar').attr('src', res.user.avatar);
 
                     $('input[name="alias"]').change(function(){
@@ -70,7 +70,7 @@ layui.use('element', function(){
             $('#cancel').css('display', 'inline-block');
             $('#confirm').unbind('click').removeAttr('onclick').click(function(){
                 $.ajax({
-                    url: '/signOut',
+                    url: '../signOut',
                     data: {},
                     complete: function(){
                         window.location.href="../login.html";
@@ -107,7 +107,7 @@ layui.use('element', function(){
                             alert(err);
                         });
                     } else {
-                        OSS.urllib.request("http://125.216.243.114:2004/requestSTS",{method: 'GET'},function (err, response) {
+                        OSS.urllib.request("http://www.jiayibilin.com/api-stsserver/requestSTS",{method: 'GET'},function (err, response) {
                             if (err) return alert(err);
                             try {
                                 result = JSON.parse(response);
@@ -147,18 +147,18 @@ layui.use('element', function(){
         var updateUser = function(param) {
 
             var alias = $('input[name="alias"]').val();
-            var password = $('input[name="password"]').val()
+            var password = $('input[name="password"]').val();
 
             if ( aliasChange ) {
                 param['alias'] = alias;
             }
 
             if ( passwordChange ) {
-                param['password'] = password;
+                param['password'] = md5('jiayibilin' + password);
             }
 
             $.ajax({
-                url: '/user/update',
+                url: '../user/update',
                 data: param,
                 success: function(res) {
 
@@ -169,7 +169,12 @@ layui.use('element', function(){
 
                     if (res.code == 0) {
                         $('#username').html(alias);
-                        $('#useravatar').attr('src', avatar);
+                        if (passwordChange) {
+                            SetCookie("password", $('input[name="password"]').val());
+                        }
+                        if (avatar != null) {
+                            $('#useravatar').attr('src', avatar);
+                        }
                         showModal('修改用户信息成功');
                     } else {
                         showModal('操作失败，请稍后重试');
@@ -188,4 +193,37 @@ layui.use('element', function(){
 function showModal(msg) {
     $('#prompt').html(msg);
     $('#infomodal').removeAttr('hidden');
+}
+
+function SetCookie(name,value)
+{
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
+//取Cookie的值
+function GetCookie(name) {
+    var arg = name + "=";
+    var alen = arg.length;
+    var clen = document.cookie.length;
+    var i = 0;
+    while (i < clen) {
+        var j = i + alen;
+        /*  alert(j); */
+        if (document.cookie.substring(i, j) == arg)
+            return getCookieVal(j);//取到cookie的值
+        i = document.cookie.indexOf(" ", i) + 1;
+        if (i == 0)
+            break;
+    }
+    return null;
+}
+
+//取到cookie的值
+function getCookieVal(offset) {
+    var endstr = document.cookie.indexOf(";", offset);
+    if (endstr == -1) endstr = document.cookie.length;
+    return unescape(document.cookie.substring(offset, endstr));
 }

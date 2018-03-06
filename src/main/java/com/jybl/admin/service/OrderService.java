@@ -13,8 +13,8 @@ public class OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    public Integer getCount() {
-        return orderMapper.getCount();
+    public Integer getCount(OrderEntity orderEntity) {
+        return orderMapper.getCount(orderEntity);
     }
 
 

@@ -16,7 +16,7 @@ layui.use('table', function(){
     table.render({
         id: 'doc_table',
         elem: '#doc_table',
-        url:  '/doctor/listAll',
+        url:  '../doctor/listAll',
         page: true,
         even: true,
         cols: [[{ field: 'id', title: '序号', width: 80 },
@@ -26,8 +26,9 @@ layui.use('table', function(){
                 { field: 'title', title: '职称', width: 120 },
                 { field: 'department', title: '科室', width: 120 },
                 { toolbar: '#ser', title: '服务', align:'center', width: 80 },
-                { field: 'verify', title: '认证状态', width: 120 },
+                { toolbar: '#status', title: '认证状态', width: 120 },
                 { field: 'count', title: '订单总数', sort: true, width: 120 },
+                { field: 'price', title: '订单总额', sort: true, width: 120 },
                 { field: 'datetime', title: '加入时间', sort: true, width: 180 },
                 { toolbar: '#opt', title: '操作', align:'center', width: 120 },
                ]]
@@ -38,12 +39,14 @@ layui.use('table', function(){
         var layEvent = obj.event; //获得 lay-event 对应的值
         var tr = obj.tr; //获得当前行 tr 的DOM对象
 
-        if(layEvent === 'service'){
-            window.location.href="docser.html?phone=" + data.phone;
-        } else if(layEvent === 'order') {
-            window.location.href="docodr.html?phone=" + data.phone;
-        } else if(layEvent === 'edit') {
-            window.location.href="adddoc.html?phone=" + data.phone + "&edit=1";
+        if (layEvent === 'service'){
+            window.location.href="./docser.html?phone=" + data.phone;
+        } else if (layEvent === 'order') {
+            window.location.href="./docodr.html?phone=" + data.phone;
+        } else if (layEvent === 'edit') {
+            window.location.href="./adddoc.html?phone=" + data.phone + "&edit=1";
+        } else if (layEvent === 'verify'){
+            window.location.href="./adddoc.html?phone=" + data.phone + "&edit=1";
         }
 
     });

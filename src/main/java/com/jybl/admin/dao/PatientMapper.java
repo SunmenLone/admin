@@ -14,8 +14,8 @@ import java.util.List;
 @Mapper
 public interface PatientMapper {
 
-    @Select("SELECT COUNT(*) FROM PATIENT_INFO")
-    Integer getCount();
+    @SelectProvider(type = PatientProvider.class, method = "selectPatientCount")
+    Integer getCount(PatientEntity patientEntity);
 
     @SelectProvider(type = PatientProvider.class, method = "selectPatient")
     List<PatientEntity> findAll(PatientEntity patientEntity, Long first, Long limit);

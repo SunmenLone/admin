@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    @Select("SELECT COUNT(*) FROM PURCHASED_SERVICE")
-    Integer getCount();
+    @SelectProvider(type = OrderProvider.class, method = "selectOrderCount")
+    Integer getCount(OrderEntity orderEntity);
 
     @SelectProvider(type = OrderProvider.class, method = "selectOrder")
     List<OrderEntity> findAll(OrderEntity orderEntity, Long first, Long limit);

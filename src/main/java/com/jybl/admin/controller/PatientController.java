@@ -53,7 +53,7 @@ public class PatientController {
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", patientService.getCount());
+        map.put("count", patientService.getCount(pe));
         map.put("data", list);
         return map;
     }

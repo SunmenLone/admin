@@ -5,10 +5,39 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class DoctorProvider {
 
+    public String selectDoctorCount(DoctorEntity doctorEntity) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT COUNT(*) FROM DOCTOR_INFO WHERE 1=1");
+
+        if( doctorEntity.getSex() != null) {
+            sb.append(" AND SEX='" + doctorEntity.getSex() +"'");
+        }
+
+        if (doctorEntity.getTitle() != null) {
+            sb.append(" AND TITLE='" + doctorEntity.getTitle() + "'");
+        }
+
+        if (doctorEntity.getVerify() != null) {
+            sb.append(" AND VERIFY='" + doctorEntity.getVerify() + "'");
+        }
+
+        if (doctorEntity.getName() != null) {
+            sb.append(" AND NAME LIKE '%" + doctorEntity.getName() + "%'");
+        }
+
+        if (doctorEntity.getDepartment() != null) {
+            sb.append(" AND DEPARTMENT='" + doctorEntity.getDepartment() + "'");
+        }
+
+        return sb.toString();
+
+    }
+
     public String selectDoctor(DoctorEntity doctorEntity, Long first, Long limit) {
 
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT A.PHONE, A.NAME, A.SEX, A.TITLE, A.DEPARTMENT, A.VERIFY, A.DATETIME, COUNT(B.INDENT_NUMBER) AS COUNT FROM DOCTOR_INFO A LEFT JOIN PURCHASED_SERVICE B ON A.PHONE = B.DOCTOR_PHONE WHERE 1=1");
+        sb.append("SELECT A.PHONE, A.NAME, A.SEX, A.TITLE, A.DEPARTMENT, A.VERIFY, A.DATETIME, COUNT(B.INDENT_NUMBER) AS COUNT, SUM(B.PRICE) AS PRICE FROM DOCTOR_INFO A LEFT JOIN PURCHASED_SERVICE B ON A.PHONE = B.DOCTOR_PHONE WHERE 1=1");
 
         if( doctorEntity.getSex() != null) {
             sb.append(" AND A.SEX='" + doctorEntity.getSex() +"'");

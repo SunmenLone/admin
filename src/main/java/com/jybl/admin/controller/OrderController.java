@@ -66,7 +66,7 @@ public class OrderController {
         Map map = new HashMap();
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", orderService.getCount());
+        map.put("count", orderService.getCount(oe));
         map.put("data", list);
         return map;
     }
